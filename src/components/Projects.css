@@ -1,0 +1,210 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Tajawal', sans-serif;
+  background: #06071D;
+  color: #fff;
+  direction: rtl;
+}
+
+.style-gradient {
+  background: linear-gradient(180deg, #8975C6 0%, #DCB8C0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.projects-section {
+  padding: 100px 15px;
+  overflow: hidden;
+}
+
+.projects-section .e-con-inner {
+  max-width: 1260px;
+  margin: 0 auto;
+}
+
+.projects-section .section-heading-wrapper {
+  background: linear-gradient(90deg, rgba(137,117,198,0.15) 0%, rgba(220,184,192,0.08) 100%);
+  border-radius: 30px;
+  padding: 50px 30px 30px;
+  margin-bottom: 40px;
+  text-align: center;
+  animation: fadeInUp 0.8s ease;
+}
+
+.projects-section .sub-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 5px;
+  line-height: 1.3;
+}
+
+.projects-section .main-title {
+  font-size: 42px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 15px;
+  line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+  .projects-section .main-title { font-size: 30px; }
+  .projects-section .sub-title { font-size: 18px; }
+}
+
+.projects-section .description {
+  font-size: 16px;
+  color: #ccc;
+  margin: 0 auto 30px;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.n-tabs-wrapper {
+  max-width: 1260px;
+  margin: 0 auto;
+}
+
+.e-n-tabs-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.e-n-tab-title {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 50px;
+  background: rgba(255,255,255,0.08);
+  color: #aaa;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.e-n-tab-title:hover {
+  background: rgba(137,117,198,0.3);
+  color: #fff;
+}
+
+.e-n-tab-title[aria-selected="true"] {
+  background: linear-gradient(180deg, #8975C6 0%, #DCB8C0 100%);
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .e-n-tab-title { font-size: 14px; padding: 10px 20px; }
+}
+
+@media (max-width: 480px) {
+  .e-n-tab-title { flex: 1; text-align: center; font-size: 13px; padding: 8px 14px; }
+}
+
+.e-n-tabs-content > .e-con:not(.e-active) { display: none; }
+.e-n-tabs-content > .e-con.e-active { display: block; }
+
+.ue_listing_carousel { direction: ltr; }
+
+.owl-carousel .owl-item {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0) scale(1, 1);
+}
+
+.uc_carousel_item { overflow: hidden; }
+
+.owl-nav .owl-prev,
+.owl-nav .owl-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #8975C6 0%, #DCB8C0 100%);
+  color: #fff;
+  font-size: 20px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(137,117,198,0.4);
+}
+
+.owl-nav .owl-prev { left: -24px; }
+.owl-nav .owl-next { right: -24px; }
+
+.owl-nav .owl-prev:hover,
+.owl-nav .owl-next:hover {
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 6px 20px rgba(137,117,198,0.6);
+}
+
+.owl-nav .owl-prev.disabled,
+.owl-nav .owl-next.disabled { display: none !important; }
+
+.owl-dots { display: none !important; }
+
+.portfolio-card {
+  border: 3px solid rgba(255,255,255,0.15);
+  border-radius: 30px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  transition: background-position 1.5s ease;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.portfolio-card:hover {
+  background-position: bottom center;
+}
+
+.portfolio-card .card-btn {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(180deg, #8975C6 0%, #DCB8C0 100%);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(137,117,198,0.3);
+}
+
+.portfolio-card .card-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 25px rgba(137,117,198,0.5);
+}
+
+.carousel-container {
+  position: relative;
+  padding: 0 40px;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translate3d(0, 60px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+.animated { animation-duration: 0.8s; animation-fill-mode: both; }
+.fadeInUp { animation-name: fadeInUp; }
