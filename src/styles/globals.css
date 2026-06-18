@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant rtl (&:where(.rtl, .rtl *));
+@custom-variant ltr (&:where(:not(.rtl), :not(.rtl) *));
+
+:root {
+  --bg-primary: #FAF7F2;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #F0ECE6;
+  --accent-electric: #5B3EE8;
+  --accent-neon: #00A86B;
+  --accent-fire: #D94A1E;
+  --text-primary: #1A1410;
+  --text-secondary: #5C5550;
+  --text-muted: #A09890;
+  --border: #E5DED6;
+  --glow-violet: rgba(91, 62, 232, 0.10);
+  --glow-mint: rgba(0, 168, 107, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  color-scheme: light;
+}
+
+.dark {
+  --bg-primary: #080B14;
+  --bg-secondary: #0E1220;
+  --bg-tertiary: #141828;
+  --accent-electric: #6C63FF;
+  --accent-neon: #00F5A0;
+  --accent-fire: #FF6B35;
+  --text-primary: #F0F4FF;
+  --text-secondary: #8892A4;
+  --text-muted: #4A5568;
+  --border: #1E2535;
+  --glow-violet: rgba(108, 99, 255, 0.15);
+  --glow-mint: rgba(0, 245, 160, 0.10);
+  --glass-bg: rgba(14, 18, 32, 0.6);
+  color-scheme: dark;
+}
+
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.2s ease;
+}
+
+html { overflow-x: hidden; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', 'Cairo', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+.rtl body,
+.rtl .font-arabic {
+  font-family: 'Cairo', 'Inter', sans-serif;
+}
+
+::selection {
+  background: var(--accent-electric);
+  color: white;
+}
+
+.font-space {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.font-arabic {
+  font-family: 'Cairo', 'Inter', sans-serif;
+}
+
+.section-label {
+  font-family: 'Inter', 'Cairo', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-electric);
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.rtl .section-label {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.section-heading {
+  font-family: 'Space Grotesk', 'Cairo', sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  margin: 0 0 16px;
+  color: var(--text-primary);
+}
+
+@media (min-width: 768px) {
+  .section-heading { font-size: 40px; }
+}
+
+.section-body {
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+@media (min-width: 768px) {
+  .section-body { font-size: 18px; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px var(--glow-violet); }
+  50% { box-shadow: 0 0 40px var(--glow-violet), 0 0 60px var(--glow-mint); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes rotate-gradient {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.rtl .marquee-track { animation-name: marquee-scroll-rtl !important; }
+@keyframes marquee-scroll-rtl {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(50%); }
+}
+
+.rtl .owl-nav .owl-prev { left: auto; right: -20px; }
+.rtl .owl-nav .owl-next { right: auto; left: -20px; }
+.rtl .owl-nav .owl-prev i::before { content: '\f054'; }
+.rtl .owl-nav .owl-next i::before { content: '\f053'; }
+.rtl .nav-arrow-icon { display: inline-block; transform: scaleX(-1); }
+
+.rtl .e-n-tabs-heading { flex-direction: row-reverse; }
+
+.rtl [style*="margin-left: auto"],
+.rtl .ml-auto { margin-left: 0 !important; margin-right: auto !important; }
+.rtl [style*="margin-right: auto"],
+.rtl .mr-auto { margin-right: 0 !important; margin-left: auto !important; }
