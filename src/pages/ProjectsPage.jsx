@@ -71,21 +71,21 @@ export default function ProjectsPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
           <span className="section-label">{t('projects.label')}</span>
           <h1 className="section-heading text-4xl md:text-5xl">{t('projects.heading')}</h1>
-          <p className="section-body mx-auto">{t('projects.desc')}</p>
+          <p className="section-body mx-auto max-w-2xl">{t('projects.desc')}</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
           {projects.map((p, i) => (
             <motion.button
               key={i}
               onClick={() => setSelected(p)}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
+              transition={{ delay: i * 0.12 }}
               className="group relative w-full text-left cursor-pointer overflow-hidden"
               style={{
                 backgroundImage: `url(${dark ? p.dark : p.light})`,
@@ -93,14 +93,14 @@ export default function ProjectsPage() {
                 backgroundPosition: 'top center',
                 backgroundRepeat: 'no-repeat',
                 border: '1.5px solid var(--accent-fire)',
-                borderRadius: 20,
+                borderRadius: 24,
                 aspectRatio: '3 / 4',
                 boxShadow: '0 0 0 0 rgba(195,74,54,0)',
-                transition: 'box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-position 1.5s ease',
+                transition: 'box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-position 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.boxShadow = '0 0 0 3px rgba(195,74,54,0.12), 0 16px 48px rgba(195,74,54,0.08)'
-                e.currentTarget.style.transform = 'translateY(-6px)'
+                e.currentTarget.style.boxShadow = '0 0 0 3px rgba(195,74,54,0.15), 0 20px 60px -10px rgba(195,74,54,0.15)'
+                e.currentTarget.style.transform = 'translateY(-8px)'
                 e.currentTarget.style.backgroundPosition = 'bottom center'
               }}
               onMouseLeave={e => {
@@ -110,28 +110,27 @@ export default function ProjectsPage() {
               }}
               dir={isRTL ? 'rtl' : 'ltr'}
             >
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-
-              <div className="absolute top-3 left-3 md:top-4 md:left-4">
-                <span className="text-[10px] md:text-[11px] font-semibold uppercase tracking-widest px-2.5 py-1 md:px-3 md:py-1.5 rounded-full" style={{ background: 'var(--accent-fire)', color: '#fff' }}>
+              <div className="absolute top-3 left-3 md:top-5 md:left-5">
+                <span className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] font-semibold uppercase tracking-widest px-3 py-1.5 md:px-4 md:py-2 rounded-full" style={{ background: 'var(--accent-fire)', color: '#fff' }}>
                   {p.tag}
                 </span>
               </div>
 
-              <div className="absolute top-3 right-3 md:top-4 md:right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-2 group-hover:translate-x-0">
-                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.2)' }}>
-                  <Eye size={14} className="text-white" />
+              <div className="absolute top-3 right-3 md:top-5 md:right-5 opacity-0 group-hover:opacity-100 transition-all duration-400 translate-x-3 group-hover:translate-x-0">
+                <div className="w-9 h-9 md:w-11 md:h-11 rounded-full flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.15)' }}>
+                  <Eye size={15} className="text-white" />
                 </div>
               </div>
 
-              <div className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6">
-                <h3 className="text-lg md:text-2xl font-bold text-white mb-0.5 md:mb-1">{p.name}</h3>
+              <div className="absolute bottom-0 left-0 right-0 p-5 md:p-7" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)' }}>
+                <h3 className="text-lg md:text-2xl font-bold text-white mb-1">{p.name}</h3>
                 <p className="text-[11px] md:text-sm text-white/60 line-clamp-1">{p.description}</p>
 
-                <div className="mt-3 md:mt-4 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
-                  <span className="text-[10px] md:text-xs font-medium text-white/80 flex items-center gap-1.5 px-3 py-1.5 rounded-full" style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.12)' }}>
-                    <ArrowUpRight size={12} /> Click to explore
+                <div className="mt-3 md:mt-4 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-2 group-hover:translate-y-0">
+                  <span className="text-[10px] md:text-xs font-medium text-white flex items-center gap-1.5 px-3.5 py-1.5 md:px-4 md:py-2 rounded-full" style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.12)' }}>
+                    <ArrowUpRight size={12} /> {lang === 'en' ? 'View Project' : 'عرض المشروع'}
                   </span>
                 </div>
               </div>
@@ -176,70 +175,75 @@ function ProjectModal({ project, onClose, lang, isRTL, dark }) {
       >
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 md:top-4 md:right-4 z-20 w-9 h-9 rounded-full flex items-center justify-center border-none cursor-pointer transition-all hover:scale-110"
-          style={{ background: 'rgba(0,0,0,0.5)', color: '#fff', backdropFilter: 'blur(8px)' }}
+          className="absolute top-3 right-3 md:top-5 md:right-5 z-20 w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center border-none cursor-pointer transition-all duration-200 hover:scale-110 hover:brightness-125"
+          style={{ background: 'rgba(0,0,0,0.55)', color: '#fff', backdropFilter: 'blur(10px)' }}
         >
           <X size={16} />
         </button>
 
-        <div className="relative h-48 md:h-72 overflow-hidden">
+        <div className="relative h-48 md:h-80 overflow-hidden">
           <img
             src={dark ? project.dark : project.light}
             alt={project.alt}
             className="w-full h-full object-cover object-top"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-transparent to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8">
-            <span className="text-[10px] md:text-xs font-semibold uppercase tracking-widest px-2.5 py-1 md:px-3 md:py-1.5 rounded-full" style={{ background: 'var(--accent-fire)', color: '#fff' }}>
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, var(--bg-primary) 0%, transparent 50%, transparent 100%)' }} />
+          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
+            <span className="inline-flex items-center gap-1.5 text-[10px] md:text-xs font-semibold uppercase tracking-widest px-3 py-1.5 md:px-4 md:py-2 rounded-full" style={{ background: 'var(--accent-fire)', color: '#fff' }}>
               {project.tag}
             </span>
-            <h2 className="text-xl md:text-3xl font-bold mt-2 md:mt-3" style={{ color: 'var(--text-primary)' }}>{project.name}</h2>
+            <h2 className="text-2xl md:text-4xl font-bold mt-3 md:mt-4" style={{ color: 'var(--text-primary)' }}>{project.name}</h2>
           </div>
         </div>
 
-        <div className="p-5 md:p-8 pt-3 md:pt-4" dir={isRTL ? 'rtl' : 'ltr'}>
-          <p className="text-sm md:text-lg leading-relaxed mb-6 md:mb-8" style={{ color: 'var(--text-secondary)' }}>
+        <div className="p-6 md:p-10 pt-4 md:pt-6" dir={isRTL ? 'rtl' : 'ltr'}>
+          <p className="text-sm md:text-base leading-relaxed mb-8 md:mb-10" style={{ color: 'var(--text-secondary)' }}>
             {project.description}
           </p>
 
-          <div className="mb-6 md:mb-8">
-            <h4 className="text-[10px] md:text-xs font-semibold tracking-widest mb-3 md:mb-4" style={{ color: 'var(--text-muted)' }}>
-              {lang === 'en' ? 'What We Did' : 'ما قمنا به'}
-            </h4>
-            <div className="grid grid-cols-1 gap-1.5">
-              {project.whatWeDid.map((item, i) => (
-                <div key={i} className="flex items-center gap-2.5 text-xs md:text-sm px-3 md:px-4 py-2.5 md:py-3 rounded-xl" style={{ background: 'var(--bg-secondary)' }}>
-                  <Check size={12} className="shrink-0 md:w-[14px]" style={{ color: 'var(--accent-fire)' }} />
-                  <span style={{ color: 'var(--text-secondary)' }}>{item}</span>
-                </div>
-              ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-10">
+            <div>
+              <h4 className="text-[10px] md:text-xs font-semibold tracking-widest mb-3 md:mb-4 flex items-center gap-2" style={{ color: 'var(--text-muted)' }}>
+                <span className="w-0.5 h-4 rounded-full" style={{ background: 'var(--accent-fire)' }} />
+                {lang === 'en' ? 'What We Did' : 'ما قمنا به'}
+              </h4>
+              <div className="flex flex-col gap-1.5">
+                {project.whatWeDid.map((item, i) => (
+                  <div key={i} className="flex items-center gap-2.5 text-xs md:text-sm px-3.5 py-2.5 md:px-4 md:py-3 rounded-xl" style={{ background: 'var(--bg-secondary)' }}>
+                    <Check size={12} className="shrink-0" style={{ color: 'var(--accent-fire)' }} />
+                    <span style={{ color: 'var(--text-secondary)' }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-[10px] md:text-xs font-semibold tracking-widest mb-3 md:mb-4 flex items-center gap-2" style={{ color: 'var(--text-muted)' }}>
+                <span className="w-0.5 h-4 rounded-full" style={{ background: 'var(--accent-fire)' }} />
+                {lang === 'en' ? 'Key Features' : 'المميزات الرئيسية'}
+              </h4>
+              <ul className="flex flex-col gap-2">
+                {project.features.map((f, i) => (
+                  <li key={i} className="flex items-center gap-2.5 text-xs md:text-sm px-3.5 py-2.5 md:px-4 md:py-3 rounded-xl" style={{ background: 'var(--bg-secondary)' }}>
+                    <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: 'var(--accent-fire)' }} />
+                    <span style={{ color: 'var(--text-secondary)' }}>{f}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
-          <div className="mb-6 md:mb-8">
-            <h4 className="text-[10px] md:text-xs font-semibold tracking-widest mb-2 md:mb-3" style={{ color: 'var(--text-muted)' }}>
-              {lang === 'en' ? 'Key Features' : 'المميزات الرئيسية'}
-            </h4>
-            <ul className="space-y-1.5 md:space-y-2">
-              {project.features.map((f, i) => (
-                <li key={i} className="flex items-center gap-2 text-xs md:text-sm" style={{ color: 'var(--text-secondary)' }}>
-                  <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: 'var(--accent-fire)' }} />
-                  {f}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="mb-6 md:mb-8">
-            <h4 className="text-[10px] md:text-xs font-semibold tracking-widest mb-2 md:mb-3" style={{ color: 'var(--text-muted)' }}>
+          <div className="mb-8 md:mb-10">
+            <h4 className="text-[10px] md:text-xs font-semibold tracking-widest mb-3 md:mb-4 flex items-center gap-2" style={{ color: 'var(--text-muted)' }}>
+              <span className="w-0.5 h-4 rounded-full" style={{ background: 'var(--accent-fire)' }} />
               {lang === 'en' ? 'Technologies' : 'التقنيات'}
             </h4>
-            <div className="flex flex-wrap gap-1.5 md:gap-2">
+            <div className="flex flex-wrap gap-2">
               {project.tech.map(t => (
                 <span
                   key={t}
-                  className="text-[10px] md:text-xs px-2.5 md:px-3.5 py-1 md:py-1.5 rounded-full font-medium"
-                  style={{ background: `color-mix(in srgb, var(--accent-fire) 10%, transparent)`, color: 'var(--accent-fire)' }}
+                  className="text-[10px] md:text-sm px-3 md:px-4 py-1.5 md:py-2 rounded-xl font-medium transition-all duration-200 hover:scale-105"
+                  style={{ background: `color-mix(in srgb, var(--accent-fire) 12%, transparent)`, color: 'var(--accent-fire)' }}
                 >
                   {t}
                 </span>
@@ -251,10 +255,10 @@ function ProjectModal({ project, onClose, lang, isRTL, dark }) {
             href={project.url}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 text-xs md:text-sm font-semibold px-5 md:px-6 py-3 md:py-3.5 rounded-full border-none cursor-pointer transition-all duration-200 hover:brightness-110 hover:scale-[1.02]"
+            className="inline-flex items-center gap-2.5 text-sm md:text-base font-semibold px-6 md:px-8 py-3.5 md:py-4 rounded-xl border-none cursor-pointer transition-all duration-300 hover:brightness-110 hover:scale-[1.02] hover:-translate-y-0.5"
             style={{ background: 'var(--accent-fire)', color: '#FFF7E9' }}
           >
-            <ExternalLink size={14} />
+            <ExternalLink size={16} />
             {lang === 'en' ? 'Visit Website' : 'زيارة الموقع'}
           </a>
         </div>
