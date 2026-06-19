@@ -1246,6 +1246,17 @@ body {
   100% { background-position: -200% 0; }
 }
 
+@media (max-width: 767px) {
+  .navbar-pill {
+    backdrop-filter: blur(4px) saturate(100%) !important;
+    -webkit-backdrop-filter: blur(4px) saturate(100%) !important;
+  }
+  .navbar-drawer {
+    backdrop-filter: blur(4px) saturate(100%) !important;
+    -webkit-backdrop-filter: blur(4px) saturate(100%) !important;
+  }
+}
+
 /* ═══════════════════════════════════════════════
    Reduced motion preferences
    ═══════════════════════════════════════════════ */

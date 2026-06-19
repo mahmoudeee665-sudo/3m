@@ -1,22 +1,23 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import Navbar from './components/layout/Navbar.jsx'
 import Footer from './components/layout/Footer.jsx'
 import Hero from './components/sections/Hero.jsx'
-import Marquee from './components/sections/Marquee.jsx'
-import Services from './components/sections/Services.jsx'
-import WhyMmm from './components/sections/WhyMmm.jsx'
-import Projects from './components/sections/Projects.jsx'
-import Process from './components/sections/Process.jsx'
-import Team from './components/sections/Team.jsx'
-import CTA from './components/sections/CTA.jsx'
 import ScrollProgress from './components/ui/ScrollProgress.jsx'
 import BackToTop from './components/ui/BackToTop.jsx'
 import CustomCursor from './components/ui/CustomCursor.jsx'
-import SectionDivider from './components/ui/SectionDivider.jsx'
 import WhatsAppButton from './components/ui/WhatsAppButton.jsx'
 import SplashScreen from './components/ui/SplashScreen.jsx'
-import NotFound from './pages/NotFound.jsx'
+
+const Marquee = lazy(() => import('./components/sections/Marquee.jsx'))
+const Services = lazy(() => import('./components/sections/Services.jsx'))
+const WhyMmm = lazy(() => import('./components/sections/WhyMmm.jsx'))
+const Projects = lazy(() => import('./components/sections/Projects.jsx'))
+const Process = lazy(() => import('./components/sections/Process.jsx'))
+const Team = lazy(() => import('./components/sections/Team.jsx'))
+const CTA = lazy(() => import('./components/sections/CTA.jsx'))
+const SectionDivider = lazy(() => import('./components/ui/SectionDivider.jsx'))
+const NotFound = lazy(() => import('./pages/NotFound.jsx'))
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -26,18 +27,20 @@ function ScrollToTop() {
 
 function Home() {
   return (
-    <main>
-      <Hero />
-      <Marquee />
-      <SectionDivider />
-      <Services />
-      <SectionDivider flip />
-      <WhyMmm />
-      <Projects />
-      <Process />
-      <Team />
-      <CTA />
-    </main>
+    <Suspense fallback={null}>
+      <main>
+        <Hero />
+        <Marquee />
+        <SectionDivider />
+        <Services />
+        <SectionDivider flip />
+        <WhyMmm />
+        <Projects />
+        <Process />
+        <Team />
+        <CTA />
+      </main>
+    </Suspense>
   )
 }
 
@@ -58,7 +61,7 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<Suspense fallback={null}><NotFound /></Suspense>} />
       </Routes>
       <Footer />
       <BackToTop />

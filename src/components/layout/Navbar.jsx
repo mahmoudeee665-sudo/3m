@@ -47,7 +47,7 @@ export default function Navbar() {
       >
         <div className="w-full max-w-5xl">
           <div
-            className="flex items-center justify-between rounded-full transition-all duration-500 navbar-island"
+            className="flex items-center justify-between rounded-full transition-all duration-500 navbar-island navbar-pill"
             style={{
               background: 'rgba(13, 10, 21, 0.35)',
               backdropFilter: 'blur(28px) saturate(180%)',
@@ -127,7 +127,7 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] flex flex-col"
+            className="fixed inset-0 z-[60] flex flex-col navbar-drawer"
             style={{ background: 'rgba(13, 10, 21, 0.6)', backdropFilter: 'blur(28px) saturate(180%)', WebkitBackdropFilter: 'blur(28px) saturate(180%)' }}
           >
             <div className="flex items-center justify-between h-16 px-6">

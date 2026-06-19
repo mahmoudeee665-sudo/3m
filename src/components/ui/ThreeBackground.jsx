@@ -50,7 +50,6 @@ export default function ThreeBackground() {
             '--dx': `${p.dx}px`, '--dy': `${p.dy}px`,
             animationDuration: `${p.dur}s`,
             animationDelay: `${p.delay}s`,
-            boxShadow: `0 0 ${p.size * 3}px ${p.color}`,
           }}
         />
       ))}
