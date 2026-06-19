@@ -109,10 +109,7 @@ export default function ProjectsPage() {
                 <img
                   src={dark ? p.dark : p.light}
                   alt={p.alt}
-                  className="w-full h-full object-cover transition-all duration-[1200ms] ease-out"
-                  style={{ objectPosition: 'center 0%' }}
-                  onMouseEnter={e => e.currentTarget.style.objectPosition = 'center 100%'}
-                  onMouseLeave={e => e.currentTarget.style.objectPosition = 'center 0%'}
+                  className="w-full h-full object-cover object-top transition-all duration-[1200ms] ease-out group-hover:object-bottom"
                 />
               </div>
 
