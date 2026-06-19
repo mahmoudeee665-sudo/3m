@@ -88,30 +88,28 @@ export default function ProjectsPage() {
               transition={{ delay: i * 0.1 }}
               className="group relative w-full text-left cursor-pointer overflow-hidden"
               style={{
-                background: 'var(--bg-secondary)',
+                backgroundImage: `url(${dark ? p.dark : p.light})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'top center',
+                backgroundRepeat: 'no-repeat',
                 border: '1.5px solid var(--accent-fire)',
                 borderRadius: 20,
                 aspectRatio: '3 / 4',
                 boxShadow: '0 0 0 0 rgba(195,74,54,0)',
-                transition: 'box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+                transition: 'box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-position 1.5s ease',
               }}
               onMouseEnter={e => {
                 e.currentTarget.style.boxShadow = '0 0 0 3px rgba(195,74,54,0.12), 0 16px 48px rgba(195,74,54,0.08)'
                 e.currentTarget.style.transform = 'translateY(-6px)'
+                e.currentTarget.style.backgroundPosition = 'bottom center'
               }}
               onMouseLeave={e => {
                 e.currentTarget.style.boxShadow = '0 0 0 0 rgba(195,74,54,0)'
                 e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.backgroundPosition = 'top center'
               }}
               dir={isRTL ? 'rtl' : 'ltr'}
             >
-              <div className="absolute inset-0 overflow-hidden" style={{ borderRadius: 18.5 }}>
-                <img
-                  src={dark ? p.dark : p.light}
-                  alt={p.alt}
-                  className="w-full h-full object-cover object-top transition-all duration-[1200ms] ease-out group-hover:object-bottom"
-                />
-              </div>
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
