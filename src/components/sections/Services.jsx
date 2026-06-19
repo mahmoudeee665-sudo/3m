@@ -32,7 +32,7 @@ export default function Services() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '45%' }}
+          viewport={{ once: true, margin: '-40px' }}
           className="text-center mb-16"
         >
           <span className="section-label">{t('services.label')}</span>
@@ -45,7 +45,7 @@ export default function Services() {
           variants={container}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: '45%' }}
+          viewport={{ once: true, margin: '-40px' }}
         >
           {servicesData.map((s, i) => (
             <motion.button
