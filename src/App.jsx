@@ -8,9 +8,8 @@ import BackToTop from './components/ui/BackToTop.jsx'
 import CustomCursor from './components/ui/CustomCursor.jsx'
 import WhatsAppButton from './components/ui/WhatsAppButton.jsx'
 import SplashScreen from './components/ui/SplashScreen.jsx'
-
-const Marquee = lazy(() => import('./components/sections/Marquee.jsx'))
-const Services = lazy(() => import('./components/sections/Services.jsx'))
+import Marquee from './components/sections/Marquee.jsx'
+import Services from './components/sections/Services.jsx'
 const WhyMmm = lazy(() => import('./components/sections/WhyMmm.jsx'))
 const Projects = lazy(() => import('./components/sections/Projects.jsx'))
 const Process = lazy(() => import('./components/sections/Process.jsx'))
