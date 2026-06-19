@@ -1011,7 +1011,7 @@ body {
    RESPONSIVE — Mobile (max-width: 767px)
    ═══════════════════════════════════════════════ */
 @media (max-width: 767px) {
-  .hero-section { min-height: 60svh; }
+  .hero-section { min-height: 70svh; }
 }
 
 /* ═══════════════════════════════════════════════
