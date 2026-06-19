@@ -19,7 +19,12 @@ function setCookie(name, value) {
 
 export function LanguageProvider({ children }) {
   const [lang, setLangState] = useState(() => {
-    try { return getCookie('lang') || 'en' } catch { return 'en' }
+    try {
+      const cached = getCookie('lang')
+      if (cached) return cached
+      const navLang = navigator.language || navigator.userLanguage || ''
+      return navLang.startsWith('ar') ? 'ar' : 'en'
+    } catch { return 'en' }
   })
 
   const setLang = useCallback((l) => {
@@ -33,8 +38,8 @@ export function LanguageProvider({ children }) {
     document.documentElement.lang = lang
     document.documentElement.classList.toggle('rtl', dir === 'rtl')
     document.title = lang === 'ar'
-      ? 'triple m — استوديو تطوير تطبيقات الويب والجوال | مصر'
-      : 'triple m — Web & Mobile App Development Studio | Egypt'
+      ? 'triple m — استوديو صناعة البرمجيات الرقمية'
+      : 'triple m — Digital Craftsmanship Studio'
   }, [lang])
 
   const t = useCallback((key) => {
