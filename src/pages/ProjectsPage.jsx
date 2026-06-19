@@ -106,7 +106,9 @@ export default function ProjectsPage() {
             ? '0 0 0 5px rgba(195,74,54,0.2), 0 0 35px rgba(195,74,54,0.18)'
             : '0 0 0 3px rgba(195,74,54,0.1), 0 16px 48px -8px rgba(0,0,0,0.2)',
           backgroundPosition: 'bottom center',
+          transition: { duration: 1.2, ease: 'easeOut' },
         }}
+        transition={{ duration: 1.2, ease: 'easeOut' }}
         style={{
           backgroundImage: `url(${dark ? project.dark : project.light})`,
           backgroundSize: 'cover',
