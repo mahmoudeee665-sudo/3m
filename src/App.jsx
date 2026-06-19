@@ -43,16 +43,11 @@ function Home() {
 }
 
 function App() {
-  const [splashDone, setSplashDone] = useState(() => localStorage.getItem('splash') === '1')
-
-  function handleSplashFinish() {
-    localStorage.setItem('splash', '1')
-    setSplashDone(true)
-  }
+  const [splashDone, setSplashDone] = useState(false)
 
   return (
     <>
-      {!splashDone && <SplashScreen onFinish={handleSplashFinish} />}
+      {!splashDone && <SplashScreen onFinish={() => setSplashDone(true)} />}
       <CustomCursor />
       <ScrollProgress />
       <Navbar />

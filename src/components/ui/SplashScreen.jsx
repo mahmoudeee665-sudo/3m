@@ -1,31 +1,42 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTheme } from '../../context/ThemeContext.jsx'
 
 function rand(min, max) { return Math.random() * (max - min) + min }
 
 export default function SplashScreen({ onFinish }) {
+  const { dark } = useTheme()
   const [show, setShow] = useState(true)
   const [progress, setProgress] = useState(0)
   const ready = useRef(false)
 
   const particles = useMemo(() => {
     const arr = []
+    const primary = dark ? '#c34a36' : '#c34a36'
+    const secondary = dark ? '#7C6FE8' : '#4A3A8C'
     for (let i = 0; i < 80; i++) {
       arr.push({
         x: rand(0, 100), y: rand(0, 100),
         size: rand(2, 5), dur: rand(4, 10), delay: -rand(0, 10),
-        dx: rand(-40, 40), dy: rand(-40, 40), color: '#c34a36',
+        dx: rand(-40, 40), dy: rand(-40, 40), color: primary,
       })
     }
     for (let i = 0; i < 50; i++) {
       arr.push({
         x: rand(0, 100), y: rand(0, 100),
         size: rand(1.5, 4), dur: rand(5, 12), delay: -rand(0, 12),
-        dx: rand(-30, 30), dy: rand(-30, 30), color: '#7C6FE8',
+        dx: rand(-30, 30), dy: rand(-30, 30), color: secondary,
       })
     }
     return arr
-  }, [])
+  }, [dark])
+
+  const bgColor = dark ? '#0d0a15' : '#FFF7E9'
+  const textColor = dark ? 'rgba(255,255,255,0.35)' : 'rgba(26,20,16,0.5)'
+  const mutedColor = dark ? 'rgba(255,255,255,0.25)' : 'rgba(26,20,16,0.35)'
+  const barTrack = dark ? 'rgba(255,255,255,0.08)' : 'rgba(26,20,16,0.08)'
+  const logo = dark ? '/logos/Orange.svg' : '/logos/dark%20purp.svg'
+  const tagline = dark ? 'Your Vision, Engineered' : 'Dream it and we build it'
 
   useEffect(() => {
     let mounted = true
@@ -66,7 +77,7 @@ export default function SplashScreen({ onFinish }) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.6 }}
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden select-none"
-          style={{ background: '#0d0a15' }}
+          style={{ background: bgColor }}
         >
           <style>{`
             .splash-particle {
@@ -112,24 +123,24 @@ export default function SplashScreen({ onFinish }) {
               <motion.div
                 className="absolute -inset-10 rounded-full"
                 style={{
-                  background: 'radial-gradient(circle, rgba(195,74,54,0.15), transparent 70%)',
+                  background: `radial-gradient(circle, ${dark ? 'rgba(195,74,54,0.15)' : 'rgba(195,74,54,0.08)'}, transparent 70%)`,
                   filter: 'blur(30px)',
                 }}
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
               />
-              <img src="/logos/Orange.svg" alt="triple m" className="w-28 h-28 md:w-36 md:h-36" />
+              <img src={logo} alt="triple m" className="w-28 h-28 md:w-36 md:h-36" />
             </motion.div>
 
             <div className="flex flex-col items-center gap-3">
               <motion.p
                 className="text-xs md:text-sm tracking-[0.2em] uppercase font-medium"
-                style={{ color: 'rgba(255,255,255,0.35)' }}
+                style={{ color: textColor }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7, duration: 0.5 }}
               >
-                Your Vision, Engineered
+                {tagline}
               </motion.p>
 
               <motion.div
@@ -138,7 +149,7 @@ export default function SplashScreen({ onFinish }) {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.9, duration: 0.4 }}
               >
-                <div className="h-[2px] rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.08)' }}>
+                <div className="h-[2px] rounded-full overflow-hidden" style={{ background: barTrack }}>
                   <motion.div
                     className="h-full rounded-full"
                     style={{ background: 'linear-gradient(90deg, var(--accent-electric), var(--accent-fire))' }}
@@ -160,7 +171,7 @@ export default function SplashScreen({ onFinish }) {
                   animate={{ opacity: [1, 0.3, 1] }}
                   transition={{ duration: 1.2, repeat: Infinity }}
                 />
-                <span className="text-[10px] tracking-[0.15em] font-medium" style={{ color: 'rgba(255,255,255,0.25)' }}>
+                <span className="text-[10px] tracking-[0.15em] font-medium" style={{ color: mutedColor }}>
                   {progress < 100 ? 'INITIALIZING' : 'CONNECTED'}
                 </span>
               </motion.div>
