@@ -144,6 +144,7 @@ const en = {
     label: 'OUR WORK',
     heading: 'Projects That Speak',
     desc: 'Every project tells a story. Here are some of our favorites.',
+    viewAll: 'View All Projects',
     tabs: ['Corporate', 'E-Commerce', 'Travel', 'Education', 'Mobile Apps'],
   },
   whyMmm: {
@@ -399,6 +400,7 @@ const ar = {
     label: 'أعمالنا',
     heading: 'مشاريع تتحدث',
     desc: 'كل مشروع يحكي قصة. إليك بعض من مفضلاتنا.',
+    viewAll: 'عرض جميع المشاريع',
     tabs: ['شركات', 'متاجر إلكترونية', 'سياحة', 'تعليم', 'تطبيقات جوال'],
   },
   whyMmm: {

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useScroll, useTransform, motion } from 'framer-motion'
 import { ArrowRight, ArrowLeft, Sparkles, Zap, Globe, Code2, Smartphone, ShoppingBag, Palette } from 'lucide-react'
 import Button from '../ui/Button.jsx'
@@ -118,7 +117,6 @@ function ServiceBadge({ icon, label, delay }) {
 
 export default function Hero() {
   const { t, lang } = useTranslation()
-  const navigate = useNavigate()
   const { scrollYProgress } = useScroll()
   const bgY = useTransform(scrollYProgress, [0, 0.3], ['0%', '20%'])
   const isRTL = lang === 'ar'
@@ -173,7 +171,7 @@ export default function Hero() {
               <Button
                 variant="gradient"
                 size="md"
-                onClick={() => navigate('/projects')}
+                onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
                 className="group hero-cta-primary"
               >
                 {lang === 'en' ? 'See Our Work' : 'شاهد أعمالنا'}

@@ -1,9 +1,11 @@
 import { useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, ArrowRight, ArrowLeft } from 'lucide-react'
 import './Projects.css'
 import { useTranslation } from '../../context/LanguageContext.jsx'
 import { useTheme } from '../../context/ThemeContext.jsx'
+import Button from '../ui/Button.jsx'
 
 const projects = [
   { name: 'Rent Go', url: 'https://rent-go.ae/', light: '/projects/rent_and_go_light.webp', dark: '/projects/rent_and_go_dark.webp', alt: 'Rent Go car rental booking platform homepage' },
@@ -29,6 +31,8 @@ export default function Projects() {
   const owlRef = useRef(null)
   const { t, lang } = useTranslation()
   const { dark } = useTheme()
+  const navigate = useNavigate()
+  const isRTL = lang === 'ar'
 
   useEffect(() => {
     const el = owlRef.current
@@ -87,6 +91,18 @@ export default function Projects() {
           <button className="carousel-btn carousel-btn-next" onClick={() => scrollCarousel('next')} aria-label="Next">
             <ChevronRight size={20} />
           </button>
+        </div>
+
+        <div className="text-center mt-10">
+          <Button
+            variant="gradient"
+            size="md"
+            onClick={() => navigate('/projects')}
+            className="group"
+          >
+            {t('projects.viewAll')}
+            {isRTL ? <ArrowLeft size={16} className="mr-2" /> : <ArrowRight size={16} className="ml-2" />}
+          </Button>
         </div>
       </div>
     </section>
