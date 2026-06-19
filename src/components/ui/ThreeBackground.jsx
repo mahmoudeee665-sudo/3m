@@ -21,32 +21,6 @@ export default function ThreeBackground() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     container.appendChild(renderer.domElement)
 
-    const rings = []
-    const ringConfigs = [
-      { rotX: 0, rotY: 0, speedX: 0.003, speedY: 0.005, radius: 1, tube: 0.03 },
-      { rotX: Math.PI / 3, rotY: Math.PI / 4, speedX: -0.004, speedY: 0.003, radius: 1, tube: 0.03 },
-      { rotX: -Math.PI / 3, rotY: -Math.PI / 4, speedX: 0.002, speedY: -0.004, radius: 1, tube: 0.03 },
-    ]
-
-    ringConfigs.forEach((cfg, i) => {
-      const geo = new THREE.TorusGeometry(cfg.radius, cfg.tube, 64, 72)
-      const mat = new THREE.MeshPhysicalMaterial({
-        color: COLORS[i],
-        metalness: 0.4,
-        roughness: 0.15,
-        transparent: true,
-        opacity: 0.35,
-        emissive: COLORS[i],
-        emissiveIntensity: 0.15,
-      })
-      const mesh = new THREE.Mesh(geo, mat)
-      mesh.rotation.x = cfg.rotX
-      mesh.rotation.y = cfg.rotY
-      mesh.userData = cfg
-      scene.add(mesh)
-      rings.push(mesh)
-    })
-
     const particlesGeo = new THREE.BufferGeometry()
     const particleCount = 600
     const positions = new Float32Array(particleCount * 3)
@@ -84,20 +58,9 @@ export default function ThreeBackground() {
     }
     window.addEventListener('resize', onResize)
 
-    function onMouse(e) {
-      mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1
-      mouse.current.y = -(e.clientY / window.innerHeight) * 2 + 1
-    }
-    window.addEventListener('mousemove', onMouse)
-
     let frame
     function animate() {
       frame = requestAnimationFrame(animate)
-      rings.forEach(ring => {
-        const cfg = ring.userData
-        ring.rotation.x += cfg.speedX + mouse.current.y * 0.002
-        ring.rotation.y += cfg.speedY + mouse.current.x * 0.002
-      })
       particles.rotation.y += 0.0003
       renderer.render(scene, camera)
     }
@@ -106,7 +69,6 @@ export default function ThreeBackground() {
     return () => {
       cancelAnimationFrame(frame)
       window.removeEventListener('resize', onResize)
-      window.removeEventListener('mousemove', onMouse)
       renderer.dispose()
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement)
