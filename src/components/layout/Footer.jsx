@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 import ThemeToggle from '../ui/ThemeToggle.jsx'
 import { useTranslation } from '../../context/LanguageContext.jsx'
 import { useTheme } from '../../context/ThemeContext.jsx'
@@ -108,16 +108,16 @@ export default function Footer() {
             &copy; 2026 triple m &middot; {t('footer.rights')}
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-xs transition-colors" style={{ color: 'var(--text-muted)' }}
+            <Link to="/privacy" className="text-xs transition-colors no-underline" style={{ color: 'var(--text-muted)' }}
                onMouseEnter={e => e.currentTarget.style.color = 'var(--text-secondary)'}
                onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}>
               {t('footer.privacy')}
-            </a>
-            <a href="#" className="text-xs transition-colors" style={{ color: 'var(--text-muted)' }}
+            </Link>
+            <Link to="/terms" className="text-xs transition-colors no-underline" style={{ color: 'var(--text-muted)' }}
                onMouseEnter={e => e.currentTarget.style.color = 'var(--text-secondary)'}
                onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}>
               {t('footer.terms')}
-            </a>
+            </Link>
             <ThemeToggle />
           </div>
         </div>

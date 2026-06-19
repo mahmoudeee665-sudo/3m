@@ -17,6 +17,8 @@ const ProjectsPage = lazy(() => import('./pages/ProjectsPage.jsx'))
 import Process from './components/sections/Process.jsx'
 import Team from './components/sections/Team.jsx'
 import CTA from './components/sections/CTA.jsx'
+import Privacy from './pages/Privacy.jsx'
+import Terms from './pages/Terms.jsx'
 const NotFound = lazy(() => import('./pages/NotFound.jsx'))
 
 function ScrollToTop() {
@@ -55,6 +57,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/projects" element={<Suspense fallback={null}><ProjectsPage /></Suspense>} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
         <Route path="*" element={<Suspense fallback={null}><NotFound /></Suspense>} />
       </Routes>
       <Footer />

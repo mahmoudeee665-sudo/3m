@@ -207,16 +207,6 @@ const en = {
     heading: 'By the Numbers',
     labels: ['Projects', 'Countries', 'Satisfaction', 'Team'],
   },
-  testimonials: {
-    label: 'TESTIMONIALS',
-    heading: 'What Our Clients Say',
-    items: [
-      { name: 'Ahmed Al-Rashid', role: 'CEO, TechVentures', quote: 'They turned our chaotic idea into a polished product in under 8 weeks. The team genuinely cares about quality.', rating: 5, initials: 'AA' },
-      { name: 'Sara Khalid', role: 'Founder, Bloom Studio', quote: 'Working with this team felt like an extension of our own company. They understood our vision immediately.', rating: 5, initials: 'SK' },
-      { name: 'Mohammed Hassan', role: 'CTO, GrowFast', quote: 'The Shopify store they built for us increased conversions by 40% in the first month alone.', rating: 5, initials: 'MH' },
-      { name: 'Lina Zaid', role: 'Product Manager, EduLearn', quote: 'Professional, responsive, and incredibly talented. Our mobile app has a 4.8 rating on the App Store.', rating: 5, initials: 'LZ' },
-    ],
-  },
   techStack: {
     label: 'TECHNOLOGY',
     heading: 'Built With The Best Tools',
@@ -464,16 +454,6 @@ const ar = {
   stats: {
     heading: 'بالأرقام',
     labels: ['مشروع', 'دول', 'رضا', 'فريق'],
-  },
-  testimonials: {
-    label: 'آراء العملاء',
-    heading: 'ماذا يقول عملاؤنا',
-    items: [
-      { name: 'أحمد الرشيد', role: 'الرئيس التنفيذي، TechVentures', quote: 'حوّلوا فكرتنا الفوضوية إلى منتج متقن في أقل من 8 أسابيع. الفريق يهتم حقاً بالجودة.', rating: 5, initials: 'أر' },
-      { name: 'سارة خالد', role: 'المؤسسة، Bloom Studio', quote: 'العمل مع هذا الفريق كان كأنه امتداد لشركتنا. فهموا رؤيتنا فوراً.', rating: 5, initials: 'سخ' },
-      { name: 'محمد حسن', role: 'المدير التقني، GrowFast', quote: 'متجر Shopify الذي بنوه لنا زاد التحويلات 40% في الشهر الأول وحده.', rating: 5, initials: 'مح' },
-      { name: 'لينا زيد', role: 'مديرة المنتج، EduLearn', quote: 'محترفون، متجاوبون، وموهوبون بشكل لا يصدق. تطبيق الجوال حصل على تقييم 4.8 في App Store.', rating: 5, initials: 'لز' },
-    ],
   },
   techStack: {
     label: 'التقنيات',
