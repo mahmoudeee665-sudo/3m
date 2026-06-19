@@ -37,9 +37,11 @@ export default function Navbar() {
     }
     if (isProjectsPage) {
       navigate('/')
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-      }))
+      const timer = setInterval(() => {
+        const el = document.getElementById(id)
+        if (el) { el.scrollIntoView({ behavior: 'smooth' }); clearInterval(timer) }
+      }, 50)
+      setTimeout(() => clearInterval(timer), 3000)
       return
     }
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
