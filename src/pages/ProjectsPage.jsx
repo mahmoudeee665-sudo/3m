@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ExternalLink, X, Check, ArrowUpRight, Layers, Palette, Code, Gauge, Smartphone, Eye, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useTranslation } from '../context/LanguageContext.jsx'
@@ -65,6 +65,7 @@ export default function ProjectsPage() {
   const [selected, setSelected] = useState(null)
   const [featuredIndex, setFeaturedIndex] = useState(0)
   const [isDesktop, setIsDesktop] = useState(false)
+  const timerRef = useRef(null)
   const isRTL = lang === 'ar'
 
   useEffect(() => {
@@ -74,23 +75,34 @@ export default function ProjectsPage() {
     return () => window.removeEventListener('resize', check)
   }, [])
 
-  useEffect(() => {
-    if (!isDesktop) return
-    const timer = setInterval(() => {
+  function startTimer() {
+    clearInterval(timerRef.current)
+    timerRef.current = setInterval(() => {
       setFeaturedIndex(prev => (prev + 1) % projects.length)
     }, 4500)
-    return () => clearInterval(timer)
+  }
+
+  useEffect(() => {
+    if (!isDesktop) return
+    startTimer()
+    return () => clearInterval(timerRef.current)
   }, [isDesktop])
 
-  const goNext = () => setFeaturedIndex(prev => (prev + 1) % projects.length)
-  const goPrev = () => setFeaturedIndex(prev => (prev - 1 + projects.length) % projects.length)
+  function goTo(index) {
+    clearInterval(timerRef.current)
+    setFeaturedIndex(index)
+    startTimer()
+  }
+
+  const goNext = () => goTo((featuredIndex + 1) % projects.length)
+  const goPrev = () => goTo((featuredIndex - 1 + projects.length) % projects.length)
 
   function ProjectCard({ project, featured, active, alwaysBorder, className = '' }) {
     return (
       <motion.button
         onClick={() => {
           if (featured) { setSelected(project); return }
-          setFeaturedIndex(projects.indexOf(project))
+          goTo(projects.indexOf(project))
           setTimeout(() => setSelected(project), 200)
         }}
         className={`group relative w-full text-left cursor-pointer overflow-hidden ${className}`}
