@@ -13,6 +13,7 @@ import Services from './components/sections/Services.jsx'
 import SectionDivider from './components/ui/SectionDivider.jsx'
 import WhyMmm from './components/sections/WhyMmm.jsx'
 import Projects from './components/sections/Projects.jsx'
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage.jsx'))
 import Process from './components/sections/Process.jsx'
 import Team from './components/sections/Team.jsx'
 import CTA from './components/sections/CTA.jsx'
@@ -58,6 +59,7 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/projects" element={<Suspense fallback={null}><ProjectsPage /></Suspense>} />
         <Route path="*" element={<Suspense fallback={null}><NotFound /></Suspense>} />
       </Routes>
       <Footer />

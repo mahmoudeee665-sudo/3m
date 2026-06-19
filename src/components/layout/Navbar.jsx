@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import ThemeToggle from '../ui/ThemeToggle.jsx'
 import LangToggle from '../ui/LangToggle.jsx'
@@ -13,6 +14,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const active = useScrollSpy(sectionIds, 120)
   const { t, lang } = useTranslation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     function onScroll() { setScrolled(window.scrollY > 50) }
@@ -27,6 +29,7 @@ export default function Navbar() {
 
   function scrollTo(id) {
     setOpen(false)
+    if (id === 'work') { navigate('/projects'); return }
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
   }
 
