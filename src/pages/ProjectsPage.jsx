@@ -91,16 +91,11 @@ export default function ProjectsPage() {
         onClick={() => featured ? setSelected(project) : setFeaturedIndex(projects.indexOf(project))}
         className={`group relative w-full text-left cursor-pointer overflow-hidden ${className}`}
         animate={active && !featured ? {
-          scale: [1, 1.05, 1],
-          boxShadow: [
-            '0 0 0 3px rgba(195,74,54,0.12), 0 0 20px rgba(195,74,54,0.1)',
-            '0 0 0 5px rgba(195,74,54,0.2), 0 0 35px rgba(195,74,54,0.18)',
-            '0 0 0 3px rgba(195,74,54,0.12), 0 0 20px rgba(195,74,54,0.1)',
-          ],
-        } : {}}
-        transition={active && !featured ? {
-          duration: 2.5, repeat: Infinity, ease: 'easeInOut',
-        } : {}}
+          scale: 1.05,
+          boxShadow: '0 0 0 3px rgba(195,74,54,0.12), 0 0 20px rgba(195,74,54,0.1)',
+        } : {
+          scale: 1,
+        }}
         whileHover={{
           y: -8,
           boxShadow: active && !featured
