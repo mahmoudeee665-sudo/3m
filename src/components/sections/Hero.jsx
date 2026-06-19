@@ -1,11 +1,10 @@
-import { useState, useEffect, useRef } from 'react'
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { useScroll, useTransform, motion } from 'framer-motion'
 import { ArrowRight, ArrowLeft, Sparkles, Zap, Globe, Code2, Smartphone, ShoppingBag, Palette, ShoppingCart } from 'lucide-react'
 import Button from '../ui/Button.jsx'
 import ThreeBackground from '../ui/ThreeBackground.jsx'
 import { useTranslation } from '../../context/LanguageContext.jsx'
 
-/* ─── Animated Gradient Heading ─── */
 function AnimatedGradientText({ children }) {
   const [x, setX] = useState(50)
   const [y, setY] = useState(50)
@@ -33,7 +32,6 @@ function AnimatedGradientText({ children }) {
   )
 }
 
-/* ─── Typewriter ─── */
 function Typewriter({ words }) {
   const [wi, setWi] = useState(0)
   const [d, setD] = useState('')
@@ -60,34 +58,25 @@ function Typewriter({ words }) {
   )
 }
 
-/* ─── Floating Service Pill ─── */
 function ServicePill({ icon: Icon, label, delay, color }) {
   return (
-    <motion.div
-      className="hero-service-pill"
-      initial={{ opacity: 0, scale: 0.8, y: 20 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ delay, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-    >
+    <div className="hero-service-pill" style={{ '--anim-delay': delay + 's' }}>
       <span className="hero-service-pill-icon" style={{ color }}>
         <Icon size={14} />
       </span>
       <span>{label}</span>
-    </motion.div>
+    </div>
   )
 }
 
-/* ─── Service Badge ─── */
 function OrbitalVisual() {
   return (
     <div className="hero-orbital">
-      {/* Central glowing orb */}
       <div className="hero-orbital-core">
         <div className="hero-orbital-core-inner">
           <Code2 size={28} strokeWidth={1.5} />
         </div>
       </div>
-      {/* Orbiting rings */}
       <div className="hero-orbital-ring hero-orbital-ring-1">
         <div className="hero-orbital-dot" style={{ '--dot-color': 'var(--accent-fire)' }}>
           <Globe size={14} />
@@ -103,7 +92,6 @@ function OrbitalVisual() {
           <ShoppingBag size={14} />
         </div>
       </div>
-      {/* Ambient glow */}
       <div className="hero-orbital-glow" />
     </div>
   )
@@ -115,25 +103,18 @@ const badgeIcons = {
   palette: Palette,
 }
 
-/* ─── Service Badge ─── */
 function ServiceBadge({ icon, label, delay }) {
   const IconComp = badgeIcons[icon]
   return (
-    <motion.div
-      className="hero-stat-card"
-      initial={{ opacity: 0, y: 20, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ delay, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-    >
+    <div className="hero-stat-card" style={{ '--anim-delay': delay + 's' }}>
       <span className="hero-stat-value" style={{ color: 'var(--accent-fire)', display: 'flex', alignItems: 'center', gap: 6, fontSize: 16 }}>
         {IconComp && <IconComp size={14} />}
       </span>
       <span className="hero-stat-label" style={{ fontSize: 10 }}>{label}</span>
-    </motion.div>
+    </div>
   )
 }
 
-/* ─── Main Hero ─── */
 export default function Hero() {
   const { t, lang } = useTranslation()
   const { scrollYProgress } = useScroll()
@@ -151,7 +132,6 @@ export default function Hero() {
     <section id="hero" className="hero-section">
       <ThreeBackground />
 
-      {/* Parallax gradient overlays */}
       <motion.div className="hero-bg-effects" style={{ y: bgY }}>
         <div className="hero-bg-gradient" />
         <div className="hero-bg-orb hero-bg-orb-1" />
@@ -159,69 +139,35 @@ export default function Hero() {
         <div className="hero-bg-orb hero-bg-orb-3" />
       </motion.div>
 
-      {/* Noise texture overlay */}
       <div className="hero-noise" />
 
-      {/* Main content */}
       <div className="hero-content">
         <div className="hero-layout">
-
-          {/* ─── Left: Text Content ─── */}
           <div className="hero-text-side">
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="hero-badge"
-            >
+            <div className="hero-badge hero-anim-fade-up" style={{ animationDelay: '0s' }}>
               <span className="hero-badge-dot" />
               <Sparkles size={12} />
               <span>{t('hero.label')}</span>
-            </motion.div>
+            </div>
 
-            {/* Heading */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="hero-heading"
-            >
+            <h1 className="hero-heading hero-anim-fade-up" style={{ animationDelay: '0.1s' }}>
               <span className="hero-heading-line">{t('hero.line1')}</span>
               <span className="hero-heading-line">
                 {t('hero.line2')}{' '}
                 <AnimatedGradientText>{t('hero.line3')}</AnimatedGradientText>
               </span>
-            </motion.h1>
+            </h1>
 
-            {/* Tagline */}
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="hero-tagline"
-            >
+            <p className="hero-tagline hero-anim-fade-up-50" style={{ animationDelay: '0.2s' }}>
               {t('hero.tagline')}
-            </motion.p>
+            </p>
 
-            {/* Typewriter */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.4 }}
-              className="hero-typewriter-wrap"
-            >
+            <div className="hero-typewriter-wrap hero-anim-fade" style={{ animationDelay: '0.3s' }}>
               <span className="hero-typewriter-label">{lang === 'en' ? 'We build' : 'نبني'}</span>
               <Typewriter words={t('hero.words')} />
-            </motion.div>
+            </div>
 
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35, duration: 0.5 }}
-              className="hero-cta-group"
-            >
+            <div className="hero-cta-group hero-anim-fade-up-50" style={{ animationDelay: '0.35s' }}>
               <Button
                 variant="gradient"
                 size="md"
@@ -238,40 +184,20 @@ export default function Hero() {
                 {lang === 'en' ? 'Get a free quote' : 'احصل على عرض سعر'}
                 {isRTL ? <ArrowLeft size={13} /> : <ArrowRight size={13} />}
               </button>
-            </motion.div>
+            </div>
 
-            {/* Service Pills — mobile visible */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-              className="hero-services-row"
-            >
+            <div className="hero-services-row hero-anim-fade" style={{ animationDelay: '0.5s' }}>
               {serviceItems.map((s, i) => (
                 <ServicePill key={i} icon={s.icon} label={s.label} color={s.color} delay={0.55 + i * 0.08} />
               ))}
-            </motion.div>
+            </div>
           </div>
 
-          {/* ─── Right: Visual Side (Desktop) ─── */}
-          <motion.div
-            className="hero-visual-side"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {/* Grid overlay */}
+          <div className="hero-visual-side hero-anim-scale" style={{ animationDelay: '0.4s' }}>
             <div className="hero-grid-overlay" />
-
             <OrbitalVisual />
 
-            {/* Floating browser mockup */}
-            <motion.div
-              className="hero-mockup-browser"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            >
+            <div className="hero-mockup-browser hero-anim-fade-up" style={{ animationDelay: '0.7s' }}>
               <div className="hero-mockup-browser-bar">
                 <span /><span /><span />
               </div>
@@ -282,52 +208,27 @@ export default function Hero() {
                 <div className="hero-mockup-line hero-mockup-line-long" />
                 <div className="hero-mockup-line hero-mockup-line-short" />
               </div>
-            </motion.div>
+            </div>
 
-            {/* Floating phone mockup */}
-            <motion.div
-              className="hero-mockup-phone"
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.9, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            >
+            <div className="hero-mockup-phone hero-anim-slide-right" style={{ animationDelay: '0.9s' }}>
               <div className="hero-mockup-phone-notch" />
               <div className="hero-mockup-phone-screen">
                 <div className="hero-mockup-phone-dot" />
                 <div className="hero-mockup-phone-bar" />
                 <div className="hero-mockup-phone-bar hero-mockup-phone-bar-short" />
               </div>
-            </motion.div>
-
-            {/* Floating stat cards */}
-            <div className="hero-floating-stats">
-              <ServiceBadge
-                icon="globe"
-                label={lang === 'en' ? 'Web Development' : 'تطوير الويب'}
-                delay={0.6}
-              />
-              <ServiceBadge
-                icon="mobile-alt"
-                label={lang === 'en' ? 'Mobile Apps' : 'تطبيقات الجوال'}
-                delay={0.7}
-              />
-              <ServiceBadge
-                icon="palette"
-                label={lang === 'en' ? 'UI/UX Design' : 'تصميم واجهات'}
-                delay={0.8}
-              />
             </div>
-          </motion.div>
+
+            <div className="hero-floating-stats">
+              <ServiceBadge icon="globe" label={lang === 'en' ? 'Web Development' : 'تطوير الويب'} delay={0.6} />
+              <ServiceBadge icon="mobile-alt" label={lang === 'en' ? 'Mobile Apps' : 'تطبيقات الجوال'} delay={0.7} />
+              <ServiceBadge icon="palette" label={lang === 'en' ? 'UI/UX Design' : 'تصميم واجهات'} delay={0.8} />
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* ─── Bottom Stats Bar (Mobile) ─── */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7, duration: 0.5 }}
-        className="hero-mobile-stats"
-      >
+      <div className="hero-mobile-stats hero-anim-fade-up-50" style={{ animationDelay: '0.7s' }}>
         <div className="hero-mobile-stats-inner">
           <div className="hero-mobile-stat">
             <span className="hero-mobile-stat-value" style={{ color: 'var(--accent-fire)', fontSize: 12 }}>
@@ -353,24 +254,14 @@ export default function Hero() {
             </span>
           </div>
         </div>
-      </motion.div>
+      </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        className="hero-scroll-indicator"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-          className="hero-scroll-mouse"
-        >
+      <div className="hero-scroll-indicator hero-anim-fade" style={{ animationDelay: '1.5s' }}>
+        <div className="hero-scroll-mouse hero-anim-bounce">
           <div className="hero-scroll-dot" />
-        </motion.div>
+        </div>
         <span className="hero-scroll-text">{lang === 'en' ? 'Scroll' : 'اسحب'}</span>
-      </motion.div>
+      </div>
     </section>
   )
 }
