@@ -110,13 +110,17 @@ export default function Navbar() {
               </button>
             </div>
 
-            <button
-              onClick={() => setOpen(true)}
-              className="md:hidden bg-transparent border-none cursor-pointer p-2"
-              aria-label="Open menu"
-            >
-              <Menu size={20} style={{ color: '#FFF7E9' }} />
-            </button>
+            <div className="md:hidden flex items-center gap-1">
+              <ThemeToggle />
+              <LangToggle />
+              <button
+                onClick={() => setOpen(true)}
+                className="bg-transparent border-none cursor-pointer p-1.5"
+                aria-label="Open menu"
+              >
+                <Menu size={20} style={{ color: '#FFF7E9' }} />
+              </button>
+            </div>
           </div>
         </div>
       </nav>
@@ -155,15 +159,7 @@ export default function Navbar() {
                   {l.label}
                 </motion.button>
               ))}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="flex items-center gap-4"
-              >
-                <ThemeToggle />
-                <LangToggle />
-              </motion.div>
+
             </div>
           </motion.div>
         )}
