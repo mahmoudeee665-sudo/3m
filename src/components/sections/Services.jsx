@@ -1,18 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Check, ArrowRight } from 'lucide-react'
+import { X, Check, ArrowRight, Globe, Smartphone, ShoppingCart, Store, Cloud, Palette, Lightbulb } from 'lucide-react'
 import Button from '../ui/Button.jsx'
 import { useTranslation } from '../../context/LanguageContext.jsx'
+import useLockedBody from '../../hooks/useLockedBody.js'
 
 const icons = [
-  <i className="fas fa-globe" />,
-  <i className="fas fa-mobile-alt" />,
-  <i className="fas fa-shopping-cart" />,
-  <i className="fas fa-store" />,
-  <i className="fas fa-cloud" />,
-  <i className="fas fa-palette" />,
+  <Globe size={20} />,
+  <Smartphone size={20} />,
+  <ShoppingCart size={20} />,
+  <Store size={20} />,
+  <Cloud size={20} />,
+  <Palette size={20} />,
 ]
-const accents = ['var(--accent-electric)', 'var(--accent-neon)', '#95BF47', 'var(--accent-fire)', 'var(--accent-electric)', 'var(--accent-neon)']
+const accents = ['var(--accent-fire)', 'var(--accent-neon)', '#95BF47', 'var(--accent-fire)', 'var(--accent-fire)', 'var(--accent-neon)']
 const cols = ['md:col-span-2', '', '', 'md:col-span-2', 'md:col-span-2', '']
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.07 } } }
@@ -23,13 +24,10 @@ export default function Services() {
   const { t, lang } = useTranslation()
   const servicesData = t('services.list').map((s, i) => ({ ...s, icon: icons[i], accent: accents[i], cols: cols[i] }))
 
-  useEffect(() => {
-    document.body.style.overflow = selected ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [selected])
+  useLockedBody(!!selected)
 
   return (
-    <section id="services" className="py-24 px-6">
+    <section id="services" className="py-24 px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -69,7 +67,7 @@ export default function Services() {
               }}
             >
               <div className="flex items-center gap-3 mb-3">
-                <span className="text-xl w-6 text-center" style={{ color: s.accent }}>{s.icon}</span>
+                <span className="hero-service-icon" style={{ background: `linear-gradient(135deg, var(--accent-fire), var(--accent-electric))` }}>{s.icon}</span>
                 <h3 className="font-space font-semibold text-lg">{s.title}</h3>
               </div>
               <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
@@ -131,12 +129,12 @@ function ServiceModal({ service, onClose, lang }) {
       >
         <div className="sticky top-0 z-10 flex items-center justify-between px-6 md:px-8 h-14 border-b" style={{ background: 'var(--bg-primary)', borderColor: 'var(--border)' }}>
           <div className="flex items-center gap-2">
-            <span className="text-lg w-6 text-center" style={{ color: service.accent }}>{service.icon}</span>
+            <span className="hero-service-icon hero-service-icon-sm" style={{ background: `linear-gradient(135deg, var(--accent-fire), var(--accent-electric))` }}>{service.icon}</span>
             <span className="font-space font-semibold">{service.title}</span>
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full flex items-center justify-center border cursor-pointer transition-colors hover:border-[var(--accent-electric)]"
+            className="w-8 h-8 rounded-full flex items-center justify-center border cursor-pointer transition-colors hover:border-[var(--accent-fire)]"
             style={{ background: 'var(--bg-tertiary)', borderColor: 'var(--border)' }}
           >
             <X size={16} />
@@ -200,7 +198,7 @@ function ServiceModal({ service, onClose, lang }) {
 
           <div className="rounded-2xl p-5 mb-8 border" style={{ background: 'var(--bg-secondary)', borderColor: 'var(--border)', borderLeft: `3px solid ${service.accent}` }}>
             <div className="flex items-start gap-3">
-              <span className="text-lg shrink-0"><i className="fas fa-lightbulb" /></span>
+              <span className="text-lg shrink-0"><Lightbulb size={20} /></span>
               <div>
                   <span className="text-xs font-semibold tracking-wider" style={{ color: 'var(--text-muted)' }}>{lang === 'en' ? 'Real Impact' : 'تأثير حقيقي'}</span>
                 <p className="text-sm mt-1 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{service.useCase}</p>
@@ -213,7 +211,7 @@ function ServiceModal({ service, onClose, lang }) {
               variant="gradient"
               size="md"
               className="group"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => { onClose(); setTimeout(() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }), 300) }}
             >
               {service.cta} <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-1" />
             </Button>

@@ -2,16 +2,30 @@ import { createContext, useContext, useState, useEffect } from 'react'
 
 export const ThemeContext = createContext()
 
+function getCookie(name) {
+  try {
+    return document.cookie.split('; ').find(r => r.startsWith(name + '='))?.split('=')[1]
+  } catch { return null }
+}
+
+function setCookie(name, value) {
+  try {
+    document.cookie = `${name}=${value};path=/;max-age=31536000;SameSite=Lax`
+  } catch {}
+}
+
 export function ThemeProvider({ children }) {
   const [dark, setDark] = useState(() => {
-    const saved = localStorage.getItem('theme')
+    const saved = getCookie('theme')
     if (saved) return saved === 'dark'
     return window.matchMedia('(prefers-color-scheme: dark)').matches
   })
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', dark)
-    localStorage.setItem('theme', dark ? 'dark' : 'light')
+    setCookie('theme', dark ? 'dark' : 'light')
+    const meta = document.querySelector('meta[name="theme-color"]')
+    if (meta) meta.content = dark ? '#1a1a2e' : '#4A3A8C'
   }, [dark])
 
   const toggle = () => setDark(p => !p)

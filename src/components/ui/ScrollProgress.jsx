@@ -18,7 +18,7 @@ export default function ScrollProgress() {
         className="h-full transition-all duration-150 ease-out"
         style={{
           width: `${progress * 100}%`,
-          background: 'linear-gradient(90deg, var(--accent-electric), var(--accent-neon))',
+          background: 'linear-gradient(90deg, var(--accent-electric), var(--accent-fire))',
         }}
       />
     </div>

@@ -1,8 +1,10 @@
 import ThemeToggle from '../ui/ThemeToggle.jsx'
 import { useTranslation } from '../../context/LanguageContext.jsx'
+import { useTheme } from '../../context/ThemeContext.jsx'
 
 export default function Footer() {
   const { t, lang, dir } = useTranslation()
+  const { dark } = useTheme()
 
   const footerLinks = [
     {
@@ -27,10 +29,11 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           <div className="col-span-2 md:col-span-1">
-            <span className="text-xl font-bold font-space">
-              <span style={{ color: 'var(--text-primary)' }}>triple </span>
-              <span style={{ color: 'var(--accent-electric)' }}>m</span>
-            </span>
+            <img
+              src={dark ? '/logos/White.svg' : '/logos/dark%20purp.svg'}
+              alt="triple m"
+              className="h-8 w-auto"
+            />
             <p className="mt-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
               {t('footer.tagline')}
             </p>

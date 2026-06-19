@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react'
 import * as THREE from 'three'
 
-const COLORS = ['#6C63FF', '#00F5A0', '#FF6B35']
+const COLORS = ['#7C6FE8', '#00F5A0', '#c34a36']
 
 export default function ThreeBackground() {
   const containerRef = useRef(null)

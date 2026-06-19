@@ -12,7 +12,7 @@ export default function Button({ children, variant = 'primary', size = 'md', cla
       <span
         className={`inline-flex rounded-full p-[2px] ${className}`}
         style={{
-          background: 'linear-gradient(135deg, var(--accent-electric), var(--accent-neon), var(--accent-fire))',
+          background: 'linear-gradient(135deg, var(--accent-fire), #d96b4a)',
         }}
       >
         <button

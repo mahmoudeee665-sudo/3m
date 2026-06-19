@@ -12,7 +12,7 @@ export default function WhyMmm() {
   const cards = t('whyMmm.cards')
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden">
+    <section id="about" className="py-24 px-6 relative overflow-hidden">
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full opacity-5 pointer-events-none"
         style={{ background: 'radial-gradient(circle, var(--accent-electric), transparent 70%)' }}
@@ -47,7 +47,7 @@ export default function WhyMmm() {
                 style={{ background: 'var(--bg-secondary)', borderColor: 'var(--border)' }}
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'var(--accent-electric)', color: '#fff' }}>
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'var(--accent-fire)', color: '#fff' }}>
                     <Icon size={20} />
                   </div>
                   <div className="flex-1 min-w-0">

@@ -5,14 +5,26 @@ export const LanguageContext = createContext()
 
 const translations = { en, ar }
 
+function getCookie(name) {
+  try {
+    return document.cookie.split('; ').find(r => r.startsWith(name + '='))?.split('=')[1]
+  } catch { return null }
+}
+
+function setCookie(name, value) {
+  try {
+    document.cookie = `${name}=${value};path=/;max-age=31536000;SameSite=Lax`
+  } catch {}
+}
+
 export function LanguageProvider({ children }) {
   const [lang, setLangState] = useState(() => {
-    try { return localStorage.getItem('lang') || 'en' } catch { return 'en' }
+    try { return getCookie('lang') || 'en' } catch { return 'en' }
   })
 
   const setLang = useCallback((l) => {
     setLangState(l)
-    try { localStorage.setItem('lang', l) } catch {}
+    setCookie('lang', l)
   }, [])
 
   useEffect(() => {
@@ -20,6 +32,9 @@ export function LanguageProvider({ children }) {
     document.documentElement.dir = dir
     document.documentElement.lang = lang
     document.documentElement.classList.toggle('rtl', dir === 'rtl')
+    document.title = lang === 'ar'
+      ? 'triple m — استوديو تطوير تطبيقات الويب والجوال | مصر'
+      : 'triple m — Web & Mobile App Development Studio | Egypt'
   }, [lang])
 
   const t = useCallback((key) => {

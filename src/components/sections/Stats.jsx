@@ -4,10 +4,10 @@ import useCountUp from '../../hooks/useCountUp.js'
 import { useTranslation } from '../../context/LanguageContext.jsx'
 
 const stats = [
-  { value: 50, suffix: '+' },
-  { value: 12, suffix: '' },
-  { value: 98, suffix: '%' },
-  { value: 3, suffix: 'x', prefix: '' },
+  { value: 10, suffix: '+' },
+  { value: 3, suffix: '' },
+  { value: 100, suffix: '%' },
+  { value: 3, suffix: '' },
 ]
 
 function StatCard({ value, suffix, label, prefix = '' }) {
@@ -29,7 +29,7 @@ function StatCard({ value, suffix, label, prefix = '' }) {
 
   return (
     <div ref={ref} className="text-center">
-      <div className="font-space font-bold text-4xl md:text-5xl" style={{ color: 'var(--accent-electric)' }}>
+      <div className="font-space font-bold text-4xl md:text-5xl" style={{ color: 'var(--accent-fire)' }}>
         {prefix}{count}{suffix}
       </div>
       <div className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>{label}</div>
