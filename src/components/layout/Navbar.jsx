@@ -50,10 +50,10 @@ export default function Navbar() {
   const links = [
     { id: 'services', label: t('nav.services'), page: false },
     { id: 'about', label: t('nav.about'), page: false },
-    { id: 'work', label: t('nav.work'), page: true },
     { id: 'process', label: t('nav.process'), page: false },
     { id: 'team', label: t('nav.team'), page: false },
     { id: 'contact', label: t('nav.contact'), page: false },
+    { id: 'work', label: t('nav.work'), page: true },
   ]
 
   return (
