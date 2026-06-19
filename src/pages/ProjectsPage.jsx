@@ -108,7 +108,7 @@ export default function ProjectsPage() {
           backgroundSize: 'cover',
           backgroundPosition: 'top center',
           backgroundRepeat: 'no-repeat',
-          border: active && !featured ? '2px solid var(--accent-fire)' : '1.5px solid transparent',
+          border: featured ? '1.5px solid var(--accent-fire)' : active && !featured ? '2px solid var(--accent-fire)' : '1.5px solid transparent',
           borderRadius: 24,
           aspectRatio: featured ? '16 / 9' : '3 / 4',
           boxShadow: featured ? 'none' : active ? '0 0 0 3px rgba(195,74,54,0.12), 0 0 20px rgba(195,74,54,0.1)' : 'none',
