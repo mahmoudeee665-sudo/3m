@@ -4,10 +4,10 @@
 .ue_listing_carousel.owl-carousel { display: block; }
 
 @media (max-width: 640px) {
-  .portfolio-card { height: 280px; }
+  .portfolio-card { height: 360px; }
 }
 @media (max-width: 480px) {
-  .portfolio-card { height: 220px; }
+  .portfolio-card { height: 320px; }
   .portfolio-card .card-btn { font-size: 13px; padding: 10px 20px; }
 }
 
