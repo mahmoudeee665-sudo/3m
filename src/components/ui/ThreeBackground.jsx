@@ -1,86 +1,59 @@
-import { useRef, useEffect } from 'react'
-import * as THREE from 'three'
+import { useMemo } from 'react'
 
 const COLORS = ['#7C6FE8', '#00F5A0', '#c34a36']
 
+function rand(min, max) { return Math.random() * (max - min) + min }
+
 export default function ThreeBackground() {
-  const containerRef = useRef(null)
-  const mouse = useRef({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
-
-    const scene = new THREE.Scene()
-    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000)
-    camera.position.z = 6.5
-    camera.position.y = 0
-
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
-    renderer.setSize(container.clientWidth, container.clientHeight)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    container.appendChild(renderer.domElement)
-
-    const particlesGeo = new THREE.BufferGeometry()
-    const particleCount = 600
-    const positions = new Float32Array(particleCount * 3)
-    const particleColors = new Float32Array(particleCount * 3)
-    for (let i = 0; i < particleCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 20
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 20
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 10
-      const c = new THREE.Color(COLORS[i % 3])
-      particleColors[i * 3] = c.r
-      particleColors[i * 3 + 1] = c.g
-      particleColors[i * 3 + 2] = c.b
-    }
-    particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
-    particlesGeo.setAttribute('color', new THREE.BufferAttribute(particleColors, 3))
-
-    const particlesMat = new THREE.PointsMaterial({
-      size: 0.035,
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.4,
-      blending: THREE.AdditiveBlending,
-    })
-    const particles = new THREE.Points(particlesGeo, particlesMat)
-    scene.add(particles)
-
-    function onResize() {
-      if (!container) return
-      const w = container.clientWidth
-      const h = container.clientHeight
-      camera.aspect = w / h
-      camera.position.y = 0
-      camera.updateProjectionMatrix()
-      renderer.setSize(w, h)
-    }
-    window.addEventListener('resize', onResize)
-
-    let frame
-    function animate() {
-      frame = requestAnimationFrame(animate)
-      particles.rotation.y += 0.0003
-      renderer.render(scene, camera)
-    }
-    animate()
-
-    return () => {
-      cancelAnimationFrame(frame)
-      window.removeEventListener('resize', onResize)
-      renderer.dispose()
-      if (container.contains(renderer.domElement)) {
-        container.removeChild(renderer.domElement)
-      }
-    }
-  }, [])
+  const particles = useMemo(() =>
+    Array.from({ length: 80 }, (_, i) => ({
+      x: rand(0, 100), y: rand(0, 100),
+      size: rand(2, 5), color: COLORS[i % 3],
+      dur: rand(6, 14), delay: -rand(0, 12),
+      dx: rand(-40, 40), dy: rand(-40, 40),
+    })),
+  [])
 
   return (
-    <div
-      ref={containerRef}
-      className="absolute inset-0 pointer-events-none"
-      style={{ zIndex: 0 }}
-    />
+    <div className="css-hero-bg">
+      <style>{`
+        .css-hero-bg {
+          position: absolute; inset: 0;
+          pointer-events: none; overflow: hidden;
+          z-index: 0;
+        }
+        .css-hero-particle {
+          position: absolute; border-radius: 50%;
+          pointer-events: none; will-change: transform;
+          animation: css-hero-drift ease-in-out infinite;
+          opacity: 0.3;
+        }
+        @keyframes css-hero-drift {
+          0%, 100% { transform: translate(0,0) scale(1); opacity: 0.1; }
+          25% { opacity: 0.5; }
+          50% { transform: translate(var(--dx),var(--dy)) scale(1.3); opacity: 0.2; }
+          75% { opacity: 0.5; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .css-hero-particle { animation: none !important; }
+        }
+      `}</style>
+
+      {particles.map((p, i) => (
+        <div
+          key={i}
+          className="css-hero-particle"
+          style={{
+            left: `${p.x}%`, top: `${p.y}%`,
+            width: p.size, height: p.size,
+            background: p.color,
+            '--dx': `${p.dx}px`, '--dy': `${p.dy}px`,
+            animationDuration: `${p.dur}s`,
+            animationDelay: `${p.delay}s`,
+            boxShadow: `0 0 ${p.size * 3}px ${p.color}`,
+          }}
+        />
+      ))}
+    </div>
   )
 }
