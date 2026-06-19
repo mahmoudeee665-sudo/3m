@@ -44,12 +44,6 @@
 
 html { overflow-x: hidden; }
 
-/* Custom cursor */
-@media (pointer: fine) {
-  * { cursor: none !important; }
-  html { cursor: none !important; }
-}
-
 body {
   margin: 0;
   font-family: 'Inter', 'Cairo', sans-serif;
