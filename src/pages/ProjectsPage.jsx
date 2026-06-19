@@ -88,7 +88,11 @@ export default function ProjectsPage() {
   function ProjectCard({ project, featured, active, alwaysBorder, className = '' }) {
     return (
       <motion.button
-        onClick={() => featured ? setSelected(project) : setFeaturedIndex(projects.indexOf(project))}
+        onClick={() => {
+          if (featured) { setSelected(project); return }
+          setFeaturedIndex(projects.indexOf(project))
+          setTimeout(() => setSelected(project), 200)
+        }}
         className={`group relative w-full text-left cursor-pointer overflow-hidden ${className}`}
         animate={active && !featured ? {
           scale: 1.05,
