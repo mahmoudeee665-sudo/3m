@@ -539,23 +539,22 @@ body {
   align-items: center;
 }
 
-/* ─── Visual Side ─── */
+/* ─── Visual Side (Desktop) ─── */
 .hero-visual-side {
-  display: flex;
+  display: none;
   position: relative;
   flex-shrink: 0;
-  width: 280px;
-  height: 280px;
+  width: 420px;
+  height: 420px;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
 }
 
 /* Orbital Visual */
 .hero-orbital {
   position: relative;
-  width: 260px;
-  height: 260px;
+  width: 320px;
+  height: 320px;
   margin: 0 auto;
 }
 
@@ -1098,6 +1097,10 @@ body {
   .hero-tagline {
     font-size: 18px;
     margin: 0 0 20px;
+  }
+
+  .hero-visual-side {
+    display: flex;
   }
 
   /* Hide mobile stats on desktop — using floating cards instead */
