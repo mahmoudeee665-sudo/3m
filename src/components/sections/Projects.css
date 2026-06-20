@@ -1,20 +1,27 @@
-*, *::before, *::after { box-sizing: border-box; }
-
-.ue_listing_carousel { direction: ltr; }
-.ue_listing_carousel.owl-carousel { display: block; }
-
-@media (max-width: 500px) {
-  .portfolio-card { height: 520px; }
-  .portfolio-card .card-btn { font-size: 13px; padding: 10px 20px; }
-}
-@media (min-width: 501px) and (max-width: 599px) {
-  .portfolio-card { height: 600px; }
+.embla {
+  overflow: hidden;
+  width: 100%;
 }
 
-.owl-carousel .owl-item {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  -webkit-transform: translateZ(0) scale(1, 1);
+.embla__container {
+  display: flex;
+  gap: 19px;
+}
+
+.embla__slide {
+  flex: 0 0 100%;
+}
+
+@media (min-width: 600px) {
+  .embla__slide { flex: 0 0 calc(50% - 9.5px); }
+}
+
+@media (min-width: 992px) {
+  .embla__slide { flex: 0 0 calc(33.3333% - 12.67px); }
+}
+
+@media (min-width: 1200px) {
+  .embla__slide { flex: 0 0 calc(25% - 14.25px); }
 }
 
 .carousel-btn {
@@ -36,14 +43,20 @@
   border: none;
   box-shadow: 0 4px 15px color-mix(in srgb, var(--accent-fire) 30%, transparent);
 }
+
 .carousel-btn-prev { left: 5px; }
+
 .carousel-btn-next { right: 5px; }
+
 .carousel-btn:hover {
   transform: translateY(-50%) scale(1.08);
   box-shadow: 0 6px 20px color-mix(in srgb, var(--accent-fire) 50%, transparent);
 }
 
-.owl-dots { display: none !important; }
+.carousel-container {
+  position: relative;
+  padding: 0 36px;
+}
 
 @media (max-width: 500px) {
   .carousel-btn-prev { left: 2px; }
@@ -51,8 +64,23 @@
   .carousel-container { padding: 0 24px; }
 }
 
+@media (max-width: 500px) {
+  .portfolio-card { height: 520px; }
+  .portfolio-card .card-btn { font-size: 13px; padding: 10px 20px; }
+}
+
+@media (min-width: 501px) and (max-width: 599px) {
+  .portfolio-card { height: 600px; }
+}
+
 .portfolio-card {
   border: 2px solid var(--accent-fire);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  background-color: transparent;
+  padding: 0;
+  width: 100%;
   border-radius: 24px;
   overflow: hidden;
   background-color: var(--bg-secondary);
@@ -105,9 +133,4 @@
   background: transparent;
   transform: scale(1.04);
   box-shadow: 0 6px 25px color-mix(in srgb, var(--accent-fire) 50%, transparent);
-}
-
-.carousel-container {
-  position: relative;
-  padding: 0 36px;
 }

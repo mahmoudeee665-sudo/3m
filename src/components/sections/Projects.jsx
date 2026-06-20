@@ -1,57 +1,90 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, ArrowRight, ArrowLeft } from 'lucide-react'
+import useEmblaCarousel from 'embla-carousel-react'
+import Autoplay from 'embla-carousel-autoplay'
 import './Projects.css'
 import { useTranslation } from '../../context/LanguageContext.jsx'
 import { useTheme } from '../../context/ThemeContext.jsx'
 import Button from '../ui/Button.jsx'
+import ProjectModal from '../ui/ProjectModal.jsx'
 
 const projects = [
-  { name: 'Rent Go', url: 'https://rent-go.ae/', light: '/projects/rent_and_go_light.webp', dark: '/projects/rent_and_go_dark.webp', alt: 'Rent Go car rental booking platform homepage' },
-  { name: 'Watan Alex', url: 'https://watan-alex.netlify.app/', light: '/projects/watan_alex_light.webp', dark: '/projects/watan_alex_dark.webp', alt: 'Watan Alex real estate property listings website' },
-  { name: 'Royal CCR', url: 'https://royal-ccrs.vercel.app/', light: '/projects/royal_ccr.webp', dark: '/projects/royal_ccr.webp', alt: 'Royal CCR construction and contracting services site' },
-  { name: 'Egyfield', url: 'https://egyfield.com/', light: '/projects/egyfield_light.webp', dark: '/projects/egyfield_dark.webp', alt: 'Egyfield oil and gas industry services website' },
+  {
+    name: 'Rent Go',
+    url: 'https://rent-go.ae/',
+    light: '/projects/rent_and_go_light.webp',
+    dark: '/projects/rent_and_go_dark.webp',
+    alt: 'Rent Go car rental booking platform homepage',
+    tag: 'Web App',
+    description: 'A full-featured car rental booking platform with real-time availability, fleet management, and online payments.',
+    whatWeDid: ['UI/UX Design', 'Frontend Development', 'Booking Engine', 'Payment Integration', 'Admin Dashboard'],
+    tech: ['React', 'Next.js', 'Tailwind CSS', 'Stripe', 'Node.js'],
+    features: ['Real-time car availability', 'Online booking with payment', 'Fleet management dashboard', 'Multi-language support'],
+  },
+  {
+    name: 'Watan Alex',
+    url: 'https://watan-alex.netlify.app/',
+    light: '/projects/watan_alex_light.webp',
+    dark: '/projects/watan_alex_dark.webp',
+    alt: 'Watan Alex real estate property listings website',
+    tag: 'Web App',
+    description: 'A modern real estate platform showcasing property listings with advanced search, virtual tours, and agent profiles.',
+    whatWeDid: ['UI/UX Design', 'Frontend Development', 'Property CMS', 'Map Integration', 'SEO Optimization'],
+    tech: ['React', 'Next.js', 'Tailwind CSS', 'Mapbox', 'Sanity CMS'],
+    features: ['Advanced property search', 'Interactive maps', 'Virtual tour support', 'Agent management system'],
+  },
+  {
+    name: 'Royal CCR',
+    url: 'https://royal-ccrs.vercel.app/',
+    light: '/projects/royal_ccr.webp',
+    dark: '/projects/royal_ccr.webp',
+    alt: 'Royal CCR construction and contracting services site',
+    tag: 'Web App',
+    description: 'A professional corporate website for a construction and contracting company showcasing their portfolio and services.',
+    whatWeDid: ['UI/UX Design', 'Frontend Development', 'Portfolio Showcase', 'Contact System', 'Performance Optimization'],
+    tech: ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion'],
+    features: ['Project portfolio gallery', 'Service showcase', 'Contact inquiry form', 'Fast loading performance'],
+  },
+  {
+    name: 'Egyfield',
+    url: 'https://egyfield.com/',
+    light: '/projects/egyfield_light.webp',
+    dark: '/projects/egyfield_dark.webp',
+    alt: 'Egyfield oil and gas industry services website',
+    tag: 'Web App',
+    description: 'A B2B corporate website for an oil and gas services company, featuring their expertise, projects, and industry insights.',
+    whatWeDid: ['UI/UX Design', 'Frontend Development', 'Corporate CMS', 'Blog/News System', 'Multilingual Support'],
+    tech: ['React', 'Next.js', 'Tailwind CSS', 'Headless CMS', 'i18n'],
+    features: ['Corporate brand identity', 'News and insights blog', 'Project case studies', 'Arabic & English support'],
+  },
 ]
 
-const carouselOpts = {
-  rtl: false,
-  loop: true,
-  margin: 19,
-  nav: false,
-  dots: false,
-  autoplay: true,
-  autoplayTimeout: 4000,
-  autoplayHoverPause: true,
-  smartSpeed: 1000,
-  responsive: { 0: { items: 1 }, 600: { items: 2 }, 992: { items: 3 }, 1200: { items: 4 } },
-}
+const slides = [...projects, ...projects, ...projects]
+
+const autoplayPlugin = Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true })
 
 export default function Projects() {
-  const owlRef = useRef(null)
   const { t, lang } = useTranslation()
   const { dark } = useTheme()
   const navigate = useNavigate()
   const isRTL = lang === 'ar'
+  const apiRef = useRef(null)
+  const [selected, setSelected] = useState(null)
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, duration: 25, direction: 'ltr' },
+    [autoplayPlugin]
+  )
 
   useEffect(() => {
-    const el = owlRef.current
-    if (el && !el.classList.contains('owl-loaded') && window.$) {
-      window.$(el).owlCarousel(carouselOpts)
-    }
-    return () => {
-      if (el && el.classList.contains('owl-loaded')) {
-        try { window.$(el).owlCarousel('destroy') } catch {}
-      }
-    }
-  }, [dark])
+    apiRef.current = emblaApi
+  }, [emblaApi])
 
-  function scrollCarousel(dir) {
-    const el = owlRef.current
-    if (el && window.$(el).hasClass('owl-loaded')) {
-      window.$(el).trigger(dir === 'prev' ? 'prev.owl.carousel' : 'next.owl.carousel')
-    }
-  }
+  useEffect(() => {
+    if (emblaApi) emblaApi.reInit()
+  }, [dark, emblaApi])
 
   return (
     <section id="work" className="py-24 px-6 overflow-hidden" style={{ background: 'var(--bg-primary)' }}>
@@ -68,27 +101,35 @@ export default function Projects() {
         </motion.div>
 
         <div className="carousel-container">
-          <button className="carousel-btn carousel-btn-prev" onClick={() => scrollCarousel('prev')} aria-label="Previous">
+          <button className="carousel-btn carousel-btn-prev" onClick={() => apiRef.current?.scrollPrev()} aria-label="Previous">
             <ChevronLeft size={20} />
           </button>
 
-          <div className="ue_listing_carousel owl-carousel owl-theme" ref={owlRef}>
-            {projects.map((p, i) => (
-              <div key={i} className="portfolio-card" data-project-index={i} role="img" aria-label={p.alt} style={{
-                backgroundImage: `url(${dark ? p.dark : p.light})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'top center',
-                backgroundRepeat: 'no-repeat',
-              }}>
-                <div className="portfolio-card-overlay" />
-                <span className="card-btn-wrap">
-                  <a className="card-btn" href={p.url} target="_blank" rel="noreferrer">{p.name}</a>
-                </span>
-              </div>
-            ))}
+          <div className="embla" ref={emblaRef}>
+            <div className="embla__container">
+              {slides.map((p, i) => (
+                <div key={i} className="embla__slide" role="group" aria-label={p.alt}>
+                  <button
+                    onClick={() => setSelected(p)}
+                    className="portfolio-card"
+                    style={{
+                      backgroundImage: `url(${dark ? p.dark : p.light})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'top center',
+                      backgroundRepeat: 'no-repeat',
+                    }}
+                  >
+                    <div className="portfolio-card-overlay" />
+                    <span className="card-btn-wrap">
+                      <span className="card-btn">{p.name}</span>
+                    </span>
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <button className="carousel-btn carousel-btn-next" onClick={() => scrollCarousel('next')} aria-label="Next">
+          <button className="carousel-btn carousel-btn-next" onClick={() => apiRef.current?.scrollNext()} aria-label="Next">
             <ChevronRight size={20} />
           </button>
         </div>
@@ -105,6 +146,12 @@ export default function Projects() {
           </Button>
         </div>
       </div>
+
+      <AnimatePresence>
+        {selected && (
+          <ProjectModal project={selected} onClose={() => setSelected(null)} lang={lang} isRTL={isRTL} dark={dark} />
+        )}
+      </AnimatePresence>
     </section>
   )
 }

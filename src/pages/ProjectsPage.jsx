@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ExternalLink, X, Check, ArrowUpRight, Layers, Palette, Code, Gauge, Smartphone, Eye, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ArrowUpRight, Layers, Palette, Code, Gauge, Smartphone, Eye, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useTranslation } from '../context/LanguageContext.jsx'
 import { useTheme } from '../context/ThemeContext.jsx'
+import ProjectModal from '../components/ui/ProjectModal.jsx'
 
 const projects = [
   {
@@ -228,135 +229,4 @@ export default function ProjectsPage() {
   )
 }
 
-function ProjectModal({ project, onClose, lang, isRTL, dark }) {
-  useEffect(() => {
-    const scrollY = window.scrollY
-    document.body.style.position = 'fixed'
-    document.body.style.top = `-${scrollY}px`
-    document.body.style.left = '0'
-    document.body.style.right = '0'
-    document.body.style.overflow = 'hidden'
-    document.body.style.width = '100%'
-    return () => {
-      document.body.style.position = ''
-      document.body.style.top = ''
-      document.body.style.left = ''
-      document.body.style.right = ''
-      document.body.style.overflow = ''
-      document.body.style.width = ''
-      window.scrollTo(0, scrollY)
-    }
-  }, [])
 
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
-      className="fixed inset-0 z-[70] flex items-start justify-center overflow-y-auto py-8 md:py-16 px-4"
-      style={{ background: 'rgba(8, 11, 20, 0.85)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', overscrollBehavior: 'contain' }}
-      onClick={onClose}
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 40, scale: 0.97 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 40, scale: 0.97 }}
-        transition={{ duration: 0.35, ease: 'easeOut' }}
-        onClick={e => e.stopPropagation()}
-        className="relative w-full max-w-4xl"
-        style={{ background: 'var(--bg-primary)', borderRadius: 24, border: '1px solid var(--border)' }}
-      >
-        <button
-          onClick={onClose}
-          className="absolute top-3 right-3 md:top-5 md:right-5 z-20 w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center border-none cursor-pointer transition-all duration-200 hover:scale-110 hover:brightness-125"
-          style={{ background: 'rgba(0,0,0,0.55)', color: '#fff', backdropFilter: 'blur(10px)' }}
-        >
-          <X size={16} />
-        </button>
-
-        <div className="relative h-48 md:h-80 overflow-hidden">
-          <img
-            src={dark ? project.dark : project.light}
-            alt={project.alt}
-            className="w-full h-full object-cover object-top"
-          />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, var(--bg-primary) 0%, transparent 50%, transparent 100%)' }} />
-          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
-            <span className="inline-flex items-center gap-1.5 text-[10px] md:text-xs font-semibold uppercase tracking-widest px-3 py-1.5 md:px-4 md:py-2 rounded-full" style={{ background: 'var(--accent-fire)', color: '#fff' }}>
-              {project.tag}
-            </span>
-            <h2 className="text-2xl md:text-4xl font-bold mt-3 md:mt-4" style={{ color: 'var(--text-primary)' }}>{project.name}</h2>
-          </div>
-        </div>
-
-        <div className="p-6 md:p-10 pt-4 md:pt-6" dir={isRTL ? 'rtl' : 'ltr'}>
-          <p className="text-sm md:text-base leading-relaxed mb-8 md:mb-10" style={{ color: 'var(--text-secondary)' }}>
-            {project.description}
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-10">
-            <div>
-              <h4 className="text-[10px] md:text-xs font-semibold tracking-widest mb-3 md:mb-4 flex items-center gap-2" style={{ color: 'var(--text-muted)' }}>
-                <span className="w-0.5 h-4 rounded-full" style={{ background: 'var(--accent-fire)' }} />
-                {lang === 'en' ? 'What We Did' : 'ما قمنا به'}
-              </h4>
-              <div className="flex flex-col gap-1.5">
-                {project.whatWeDid.map((item, i) => (
-                  <div key={i} className="flex items-center gap-2.5 text-xs md:text-sm px-3.5 py-2.5 md:px-4 md:py-3 rounded-xl" style={{ background: 'var(--bg-secondary)' }}>
-                    <Check size={12} className="shrink-0" style={{ color: 'var(--accent-fire)' }} />
-                    <span style={{ color: 'var(--text-secondary)' }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h4 className="text-[10px] md:text-xs font-semibold tracking-widest mb-3 md:mb-4 flex items-center gap-2" style={{ color: 'var(--text-muted)' }}>
-                <span className="w-0.5 h-4 rounded-full" style={{ background: 'var(--accent-fire)' }} />
-                {lang === 'en' ? 'Key Features' : 'المميزات الرئيسية'}
-              </h4>
-              <ul className="flex flex-col gap-2">
-                {project.features.map((f, i) => (
-                  <li key={i} className="flex items-center gap-2.5 text-xs md:text-sm px-3.5 py-2.5 md:px-4 md:py-3 rounded-xl" style={{ background: 'var(--bg-secondary)' }}>
-                    <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: 'var(--accent-fire)' }} />
-                    <span style={{ color: 'var(--text-secondary)' }}>{f}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className="mb-8 md:mb-10">
-            <h4 className="text-[10px] md:text-xs font-semibold tracking-widest mb-3 md:mb-4 flex items-center gap-2" style={{ color: 'var(--text-muted)' }}>
-              <span className="w-0.5 h-4 rounded-full" style={{ background: 'var(--accent-fire)' }} />
-              {lang === 'en' ? 'Technologies' : 'التقنيات'}
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {project.tech.map(t => (
-                <span
-                  key={t}
-                  className="text-[10px] md:text-sm px-3 md:px-4 py-1.5 md:py-2 rounded-xl font-medium transition-all duration-200 hover:scale-105"
-                  style={{ background: `color-mix(in srgb, var(--accent-fire) 12%, transparent)`, color: 'var(--accent-fire)' }}
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2.5 text-sm md:text-base font-semibold px-6 md:px-8 py-3.5 md:py-4 rounded-xl border-none cursor-pointer transition-all duration-300 hover:brightness-110 hover:scale-[1.02] hover:-translate-y-0.5"
-            style={{ background: 'var(--accent-fire)', color: '#FFF7E9' }}
-          >
-            <ExternalLink size={16} />
-            {lang === 'en' ? 'Visit Website' : 'زيارة الموقع'}
-          </a>
-        </div>
-      </motion.div>
-    </motion.div>
-  )
-}
