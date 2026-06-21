@@ -12,10 +12,10 @@ const sectionIds = ['hero', 'services', 'about', 'process', 'team', 'contact']
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
-  const active = useScrollSpy(sectionIds, 120, location.pathname)
   const { t, lang } = useTranslation()
   const navigate = useNavigate()
   const location = useLocation()
+  const active = useScrollSpy(sectionIds, 120, location.pathname)
   const isProjectsPage = location.pathname === '/projects'
 
   useEffect(() => {
