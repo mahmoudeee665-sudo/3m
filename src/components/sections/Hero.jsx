@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useScroll, useTransform, motion } from 'framer-motion'
-import { ArrowRight, ArrowLeft, Sparkles, Zap, Globe, Code2, Smartphone, ShoppingBag, Palette } from 'lucide-react'
+import { ArrowRight, ArrowLeft, Sparkles, Globe, Code2, Store, ShoppingBag, Palette } from 'lucide-react'
 import Button from '../ui/Button.jsx'
 import ThreeBackground from '../ui/ThreeBackground.jsx'
 import { useTranslation } from '../../context/LanguageContext.jsx'
@@ -84,7 +84,7 @@ function OrbitalVisual() {
       </div>
       <div className="hero-orbital-ring hero-orbital-ring-2">
         <div className="hero-orbital-dot" style={{ '--dot-color': 'var(--accent-fire)' }}>
-          <Smartphone size={14} />
+          <Store size={14} />
         </div>
       </div>
       <div className="hero-orbital-ring hero-orbital-ring-3">
@@ -97,11 +97,7 @@ function OrbitalVisual() {
   )
 }
 
-const badgeIcons = {
-  globe: Globe,
-  'mobile-alt': Smartphone,
-  palette: Palette,
-}
+const badgeIcons = { globe: Globe, 'shopping-bag': ShoppingBag, palette: Palette }
 
 function ServiceBadge({ icon, label, delay }) {
   const IconComp = badgeIcons[icon]
@@ -123,9 +119,10 @@ export default function Hero() {
 
   const serviceItems = [
     { icon: Globe, label: lang === 'en' ? 'Web Apps' : 'تطبيقات ويب', color: 'var(--accent-fire)' },
-    { icon: Smartphone, label: lang === 'en' ? 'Mobile' : 'جوال', color: 'var(--accent-fire)' },
     { icon: ShoppingBag, label: lang === 'en' ? 'E-Commerce' : 'تجارة إلكترونية', color: 'var(--accent-fire)' },
-    { icon: Zap, label: lang === 'en' ? 'SaaS' : 'SaaS', color: 'var(--accent-fire)' },
+    { icon: Store, label: lang === 'en' ? 'Shopify' : 'Shopify', color: 'var(--accent-fire)' },
+    { icon: Code2, label: lang === 'en' ? 'MVPs' : 'MVP', color: 'var(--accent-fire)' },
+    { icon: Palette, label: lang === 'en' ? 'UI/UX' : 'تصميم واجهات', color: 'var(--accent-fire)' },
   ]
 
   return (
@@ -221,7 +218,7 @@ export default function Hero() {
 
             <div className="hero-floating-stats">
               <ServiceBadge icon="globe" label={lang === 'en' ? 'Web Development' : 'تطوير الويب'} delay={0.6} />
-              <ServiceBadge icon="mobile-alt" label={lang === 'en' ? 'Mobile Apps' : 'تطبيقات الجوال'} delay={0.7} />
+              <ServiceBadge icon="shopping-bag" label={lang === 'en' ? 'E-Commerce' : 'تجارة إلكترونية'} delay={0.7} />
               <ServiceBadge icon="palette" label={lang === 'en' ? 'UI/UX Design' : 'تصميم واجهات'} delay={0.8} />
             </div>
           </div>

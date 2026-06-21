@@ -54,7 +54,7 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-1">
             <img
               src={dark ? '/logos/White.svg' : '/logos/dark%20purp.svg'}
-              alt="triple m"
+              alt="triple m — Digital Craftsmanship Studio"
               className="h-8 w-auto"
             />
             <p className="mt-3 text-sm font-medium" style={{ color: 'var(--accent-fire)' }}>

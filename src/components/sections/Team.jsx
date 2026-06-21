@@ -5,8 +5,8 @@ import { useTranslation } from '../../context/LanguageContext.jsx'
 const team = [
   {
     name: 'Mohamed Ramy Elmagrby',
-    titleEn: 'Social Media Manager',
-    titleAr: 'مدير وسائل التواصل الاجتماعي',
+    titleEn: 'Frontend Developer',
+    titleAr: 'مطور واجهات أمامية',
     img: '/ramy.webp',
     portfolio: '#',
   },
@@ -62,7 +62,7 @@ export default function Team() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 items-start">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-10 items-start">
           {team.map((member, i) => {
             return (
               <motion.div

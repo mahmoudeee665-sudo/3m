@@ -1,20 +1,19 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Check, ArrowRight, Globe, Smartphone, ShoppingCart, Store, Cloud, Palette, Lightbulb } from 'lucide-react'
+import { X, Check, ArrowRight, Globe, ShoppingCart, Store, Cloud, Palette, Lightbulb } from 'lucide-react'
 import Button from '../ui/Button.jsx'
 import { useTranslation } from '../../context/LanguageContext.jsx'
 import useLockedBody from '../../hooks/useLockedBody.js'
 
 const icons = [
   <Globe size={20} />,
-  <Smartphone size={20} />,
   <ShoppingCart size={20} />,
   <Store size={20} />,
   <Cloud size={20} />,
   <Palette size={20} />,
 ]
-const accents = ['var(--accent-fire)', 'var(--accent-neon)', '#95BF47', 'var(--accent-fire)', 'var(--accent-fire)', 'var(--accent-neon)']
-const cols = ['md:col-span-2', '', '', 'md:col-span-2', 'md:col-span-2', '']
+const accents = ['var(--accent-fire)', 'var(--accent-neon)', '#95BF47', 'var(--accent-fire)', 'var(--accent-neon)']
+const cols = ['md:col-span-2', '', '', '', '']
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.07 } } }
 const itemAnim = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } } }
@@ -23,6 +22,24 @@ export default function Services() {
   const [selected, setSelected] = useState(null)
   const { t, lang } = useTranslation()
   const servicesData = t('services.list').map((s, i) => ({ ...s, icon: icons[i], accent: accents[i], cols: cols[i] }))
+
+  useEffect(() => {
+    const faqSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: servicesData.map(s => ({
+        '@type': 'Question',
+        name: s.title,
+        acceptedAnswer: { '@type': 'Answer', text: s.tagline },
+      })),
+    }
+    const script = document.createElement('script')
+    script.type = 'application/ld+json'
+    script.id = 'faq-schema'
+    script.textContent = JSON.stringify(faqSchema)
+    document.head.appendChild(script)
+    return () => document.getElementById('faq-schema')?.remove()
+  }, [lang])
 
   useLockedBody(!!selected)
 

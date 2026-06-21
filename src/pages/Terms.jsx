@@ -16,7 +16,7 @@ export default function Terms() {
             </section>
             <section>
               <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>2. الخدمات</h2>
-              <p>نقدم خدمات تطوير تطبيقات الويب والجوال، متاجر Shopify، ومنتجات SaaS. يتم تحديد نطاق العمل والتسليمات في اتفاقية منفصلة لكل مشروع.</p>
+              <p>نقدم خدمات تطوير تطبيقات الويب، متاجر التجارة الإلكترونية و Shopify، والـ MVPs، وتصميم واجهات المستخدم. يتم تحديد نطاق العمل والتسليمات في اتفاقية منفصلة لكل مشروع.</p>
             </section>
             <section>
               <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>3. الملكية الفكرية</h2>
@@ -48,7 +48,7 @@ export default function Terms() {
           </section>
           <section>
             <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>2. Services</h2>
-            <p>We provide web and mobile app development, Shopify stores, and SaaS products. Project scope and deliverables are defined in a separate agreement for each engagement.</p>
+            <p>We provide web app development, e-commerce and Shopify stores, MVPs, and UI/UX design. Project scope and deliverables are defined in a separate agreement for each engagement.</p>
           </section>
           <section>
             <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>3. Intellectual Property</h2>

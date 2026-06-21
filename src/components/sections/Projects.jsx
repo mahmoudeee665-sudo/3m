@@ -74,7 +74,7 @@ export default function Projects() {
   const [selected, setSelected] = useState(null)
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
-    { loop: true, duration: 25, direction: 'ltr' },
+    { loop: true, duration: 25, direction: isRTL ? 'rtl' : 'ltr' },
     [autoplayPlugin]
   )
 

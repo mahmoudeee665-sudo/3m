@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowUpRight, Layers, Palette, Code, Gauge, Smartphone, Eye, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ArrowUpRight, Layers, Palette, Code, Gauge, Globe, Eye, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useTranslation } from '../context/LanguageContext.jsx'
 import { useTheme } from '../context/ThemeContext.jsx'
 import ProjectModal from '../components/ui/ProjectModal.jsx'
@@ -17,7 +17,7 @@ const projects = [
     whatWeDid: ['UI/UX Design', 'Frontend Development', 'Booking Engine', 'Payment Integration', 'Admin Dashboard'],
     tech: ['React', 'Next.js', 'Tailwind CSS', 'Stripe', 'Node.js'],
     features: ['Real-time car availability', 'Online booking with payment', 'Fleet management dashboard', 'Multi-language support'],
-    icon: Smartphone,
+    icon: Globe,
   },
   {
     name: 'Watan Alex',
@@ -128,7 +128,7 @@ export default function ProjectsPage() {
           backgroundRepeat: 'no-repeat',
           border: alwaysBorder ? '1.5px solid var(--accent-fire)' : featured ? '1.5px solid var(--accent-fire)' : active && !featured ? '2px solid var(--accent-fire)' : '1.5px solid transparent',
           borderRadius: 24,
-          aspectRatio: featured ? '16 / 9' : '3 / 4',
+          aspectRatio: featured ? '16 / 9' : isDesktop ? '3 / 4' : '4 / 3',
           boxShadow: featured ? 'none' : active ? '0 0 0 3px rgba(195,74,54,0.12), 0 0 20px rgba(195,74,54,0.1)' : 'none',
           transition: 'background-position 1.5s ease, box-shadow 0.4s ease, transform 0.4s ease',
         }}

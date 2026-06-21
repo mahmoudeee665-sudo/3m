@@ -42,7 +42,7 @@ export default function CTA() {
   return (
     <section id="contact" className="relative py-24 md:py-32 px-6 flex items-center justify-center overflow-hidden">
       <div
-        className="absolute inset-0 opacity-20 dark:opacity-20"
+        className="absolute inset-0 opacity-20 dark:opacity-20 cta-bg-anim"
         style={{
           background: 'radial-gradient(ellipse at 50% 0%, var(--accent-electric) 0%, transparent 60%), radial-gradient(ellipse at 50% 100%, var(--accent-fire) 0%, transparent 50%)',
           animation: 'pulse-glow 4s ease-in-out infinite alternate',

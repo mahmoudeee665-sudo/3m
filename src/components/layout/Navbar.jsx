@@ -7,7 +7,7 @@ import LangToggle from '../ui/LangToggle.jsx'
 import useScrollSpy from '../../hooks/useScrollSpy.js'
 import { useTranslation } from '../../context/LanguageContext.jsx'
 
-const sectionIds = ['hero', 'services', 'about', 'work', 'process', 'stats', 'team', 'contact']
+const sectionIds = ['hero', 'services', 'about', 'work', 'process', 'team', 'contact']
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -66,17 +66,17 @@ export default function Navbar() {
       >
         <div className="w-full max-w-5xl">
           <div
-            className="flex items-center justify-between rounded-full transition-all duration-500 navbar-island navbar-pill"
+            className="flex items-center justify-between rounded-full transition-all duration-500 navbar-island navbar-pill px-4 sm:px-5 md:px-7"
             style={{
               background: 'rgba(13, 10, 21, 0.35)',
               border: '1px solid rgba(255, 247, 233, 0.06)',
               opacity: 0.85,
               boxShadow: '0 8px 32px rgba(0,0,0,0.35)',
-              padding: '10px 28px',
+              padding: '10px 16px',
             }}
           >
             <a href="/" className="flex items-center no-underline shrink-0">
-              <img src="/logos/Orange.svg" alt="triple m" className="h-7 w-auto" />
+              <img src="/logos/Orange.svg" alt="triple m — Digital Craftsmanship Studio" className="h-7 w-auto" />
             </a>
 
               <div className="hidden md:flex items-center gap-0">
@@ -155,7 +155,7 @@ export default function Navbar() {
           >
             <div className="flex items-center justify-between h-16 px-6">
               <a href="/" className="flex items-center no-underline">
-                <img src="/logos/Orange.svg" alt="triple m" className="h-7 w-auto" />
+                <img src="/logos/Orange.svg" alt="triple m — Digital Craftsmanship Studio" className="h-7 w-auto" />
               </a>
               <button onClick={() => setOpen(false)} className="bg-transparent border-none cursor-pointer p-2" aria-label="Close menu">
                 <X size={24} style={{ color: '#FFF7E9' }} />

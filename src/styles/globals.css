@@ -1203,7 +1203,8 @@ body {
   .hero-stat-card,
   .hero-badge-dot,
   .navbar-island::before,
-  .navbar-island::after {
+  .navbar-island::after,
+  .cta-bg-anim {
     animation: none !important;
   }
 }
