@@ -69,7 +69,7 @@ export default function Navbar() {
             className="flex items-center justify-between rounded-full transition-all duration-500 navbar-island navbar-pill px-4 sm:px-5 md:px-7"
             style={{
               background: scrolled ? 'var(--nav-bg-scrolled)' : 'var(--nav-bg)',
-              border: '1px solid var(--nav-border)',
+              border: '2px solid var(--nav-border)',
               opacity: 0.85,
               boxShadow: scrolled ? 'var(--nav-shadow-scrolled)' : 'var(--nav-shadow)',
               backdropFilter: scrolled ? 'blur(12px)' : 'blur(0px)',
