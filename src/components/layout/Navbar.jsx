@@ -68,10 +68,10 @@ export default function Navbar() {
           <div
             className="flex items-center justify-between rounded-full transition-all duration-500 navbar-island navbar-pill px-4 sm:px-5 md:px-7"
             style={{
-              background: scrolled ? 'rgba(13, 10, 21, 0.55)' : 'rgba(13, 10, 21, 0.35)',
-              border: '1px solid rgba(255, 247, 233, 0.06)',
+              background: scrolled ? 'var(--nav-bg-scrolled)' : 'var(--nav-bg)',
+              border: '1px solid var(--nav-border)',
               opacity: 0.85,
-              boxShadow: scrolled ? '0 8px 32px rgba(0,0,0,0.45)' : '0 8px 32px rgba(0,0,0,0.35)',
+              boxShadow: scrolled ? 'var(--nav-shadow-scrolled)' : 'var(--nav-shadow)',
               backdropFilter: scrolled ? 'blur(12px)' : 'blur(0px)',
               WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'blur(0px)',
               padding: '10px 16px',
@@ -85,20 +85,20 @@ export default function Navbar() {
                 {links.map((l, i) => (
                   <div key={l.id} className="flex items-center gap-0">
                     {i > 0 && (
-                      <span className="mx-3 text-[10px]" style={{ color: 'rgba(255, 247, 233, 0.2)' }}>●</span>
+                      <span className="mx-3 text-[10px]" style={{ color: 'var(--nav-text)', opacity: 0.3 }}>●</span>
                     )}
                     <button
                     onClick={() => scrollTo(l.id)}
                     className="group bg-transparent border-none cursor-pointer transition-colors duration-200"
                     style={{
-                      color: effectiveActive === l.id ? 'var(--accent-fire)' : 'rgba(255, 247, 233, 0.65)',
+                      color: effectiveActive === l.id ? 'var(--accent-fire)' : 'var(--nav-text)',
                       fontSize: effectiveActive === l.id ? '14px' : '13px',
                       fontWeight: effectiveActive === l.id ? 700 : 500,
                       letterSpacing: '0.03em',
                       opacity: isProjectsPage && !l.page ? 0.5 : 1,
                     }}
-                    onMouseEnter={e => { if (effectiveActive !== l.id) e.target.style.color = '#FFF7E9' }}
-                    onMouseLeave={e => { if (effectiveActive !== l.id) e.target.style.color = 'rgba(255, 247, 233, 0.65)' }}
+                    onMouseEnter={e => { if (effectiveActive !== l.id) e.target.style.color = 'var(--nav-text-hover)' }}
+                    onMouseLeave={e => { if (effectiveActive !== l.id) e.target.style.color = 'var(--nav-text)' }}
                   >
                     <span className="relative inline-flex items-center gap-1">
                       {l.label}
@@ -139,7 +139,7 @@ export default function Navbar() {
                 className="bg-transparent border-none cursor-pointer p-1.5"
                 aria-label="Open menu"
               >
-                <Menu size={20} style={{ color: '#FFF7E9' }} />
+                <Menu size={20} style={{ color: 'var(--nav-text-hover)' }} />
               </button>
             </div>
           </div>
