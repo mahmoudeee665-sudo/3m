@@ -1291,6 +1291,19 @@ body {
   gap: 16px;
 }
 
+@media (min-width: 601px) and (max-width: 767px) {
+  .hero-content-v2 {
+    padding: 100px 30px 50px;
+  }
+  .hero-tagline-v2 {
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+  .hero-cta-v2 {
+    gap: 12px;
+  }
+}
+
 @media (min-width: 768px) {
   .hero-content-v2 {
     padding: 130px 40px 70px;
@@ -1311,7 +1324,7 @@ body {
 
 @media (max-width: 600px) {
   .hero-section-v2 {
-    min-height: 55svh;
+    min-height: 50svh;
   }
   .hero-content-v2 {
     padding: 80px 20px 30px;
