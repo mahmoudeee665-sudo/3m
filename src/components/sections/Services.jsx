@@ -6,11 +6,11 @@ import { useTranslation } from '../../context/LanguageContext.jsx'
 import useLockedBody from '../../hooks/useLockedBody.js'
 
 const icons = [
-  <Globe size={20} />,
-  <ShoppingCart size={20} />,
-  <Store size={20} />,
-  <Cloud size={20} />,
-  <Palette size={20} />,
+  <Globe size={16} />,
+  <ShoppingCart size={16} />,
+  <Store size={16} />,
+  <Cloud size={16} />,
+  <Palette size={16} />,
 ]
 const accents = ['var(--accent-fire)', 'var(--accent-neon)', '#95BF47', 'var(--accent-fire)', 'var(--accent-neon)']
 const cols = ['md:col-span-2', '', '', '', '']

@@ -3,9 +3,11 @@ import { motion } from 'framer-motion'
 import { Send, CheckCircle } from 'lucide-react'
 import emailjs from '@emailjs/browser'
 import { useTranslation } from '../../context/LanguageContext.jsx'
+import { useTheme } from '../../context/ThemeContext.jsx'
 
 export default function CTA() {
   const { t, lang } = useTranslation()
+  const { dark } = useTheme()
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState(false)
@@ -42,10 +44,19 @@ export default function CTA() {
 
   return (
     <section id="contact" className="relative py-24 md:py-32 px-6 flex items-center justify-center overflow-hidden">
+      {dark && (
+        <div
+          className="absolute inset-0 opacity-20 dark:opacity-20"
+          style={{
+            background: 'radial-gradient(ellipse at 50% 0%, var(--accent-electric) 0%, transparent 60%)',
+            animation: 'pulse-glow 4s ease-in-out infinite alternate',
+          }}
+        />
+      )}
       <div
-        className="absolute inset-0 opacity-20 dark:opacity-20 cta-bg-anim"
+        className="absolute inset-0 opacity-20 dark:opacity-20"
         style={{
-          background: 'radial-gradient(ellipse at 50% 0%, var(--accent-electric) 0%, transparent 60%), radial-gradient(ellipse at 50% 100%, var(--accent-fire) 0%, transparent 50%)',
+          background: 'radial-gradient(ellipse at 50% 100%, var(--accent-fire) 0%, transparent 50%)',
           animation: 'pulse-glow 4s ease-in-out infinite alternate',
         }}
       />

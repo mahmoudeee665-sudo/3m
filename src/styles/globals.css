@@ -815,4 +815,21 @@ body {
   }
 }
 
+.hero-service-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff;
+}
+
+.hero-service-icon-sm {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+}
+
 
