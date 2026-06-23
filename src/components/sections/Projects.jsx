@@ -109,8 +109,7 @@ export default function Projects() {
             <div className="embla__container">
               {slides.map((p, i) => (
                 <div key={i} className="embla__slide" role="group" aria-label={p.alt}>
-                  <button
-                    onClick={() => setSelected(p)}
+                  <div
                     className="portfolio-card"
                     style={{
                       backgroundImage: `url(${dark ? p.dark : p.light})`,
@@ -121,9 +120,9 @@ export default function Projects() {
                   >
                     <div className="portfolio-card-overlay" />
                     <span className="card-btn-wrap">
-                      <span className="card-btn">{p.name}</span>
+                      <button onClick={() => setSelected(p)} className="card-btn">{p.name}</button>
                     </span>
-                  </button>
+                  </div>
                 </div>
               ))}
             </div>

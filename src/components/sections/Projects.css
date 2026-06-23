@@ -74,7 +74,6 @@
 
 .portfolio-card {
   border: 2px solid var(--accent-fire);
-  cursor: pointer;
   text-align: left;
   font-family: inherit;
   background-color: transparent;
