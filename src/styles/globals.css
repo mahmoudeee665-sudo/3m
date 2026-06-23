@@ -1311,27 +1311,31 @@ body {
 
 @media (max-width: 600px) {
   .hero-section-v2 {
-    min-height: 100svh;
+    min-height: 55svh;
   }
   .hero-content-v2 {
-    padding: 100px 20px 50px;
+    padding: 80px 20px 30px;
     align-items: flex-start;
   }
   .hero-inner-v2 {
     align-items: center;
   }
   .hero-heading-v2 {
-    font-size: clamp(1.9rem, 9vw, 2.8rem) !important;
-    margin-bottom: 16px;
+    font-size: clamp(1.65rem, 8vw, 2.4rem) !important;
+    margin-bottom: 10px;
   }
   .hero-tagline-v2 {
-    font-size: 14px;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  .hero-typewriter-v2 {
+    font-size: 12px;
   }
   .hero-cta-v2 {
     flex-direction: column !important;
     align-items: stretch !important;
     width: 100% !important;
-    gap: 10px;
+    gap: 8px;
   }
   .hero-cta-v2 .hero-cta-primary {
     width: 100%;
