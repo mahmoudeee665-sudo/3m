@@ -78,20 +78,21 @@ export default function Team() {
                   className="relative rounded-full p-[2px] mb-5 w-44 h-44 sm:w-52 sm:h-52"
                   style={{
                     background: 'linear-gradient(135deg, var(--accent-fire), var(--accent-electric))',
-                    transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                    boxShadow: '0 0 20px rgba(195, 74, 54, 0.10), 0 8px 30px rgba(0,0,0,0.06)',
+                    transition: 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                    boxShadow: 'var(--team-shadow, 0 0 20px rgba(195, 74, 54, 0.10), 0 8px 30px rgba(0,0,0,0.06))',
+                    transform: 'var(--team-transform, translateY(0) scale(1))',
                   }}
                   onMouseEnter={e => {
-                    e.currentTarget.style.transform = 'translateY(-8px) scale(1.05)'
-                    e.currentTarget.style.boxShadow = '0 0 60px rgba(195, 74, 54, 0.25), 0 0 60px rgba(124, 111, 232, 0.15), 0 25px 50px rgba(0,0,0,0.12)'
+                    e.currentTarget.style.setProperty('--team-transform', 'translateY(-8px) scale(1.05)')
+                    e.currentTarget.style.setProperty('--team-shadow', '0 0 60px rgba(195, 74, 54, 0.25), 0 0 60px rgba(124, 111, 232, 0.15), 0 25px 50px rgba(0,0,0,0.12)')
                     const img = e.currentTarget.querySelector('img')
                     const overlay = e.currentTarget.querySelector('.team-overlay')
                     if (img) img.style.transform = 'scale(1.1)'
                     if (overlay) overlay.style.opacity = '1'
                   }}
                   onMouseLeave={e => {
-                    e.currentTarget.style.transform = 'translateY(0) scale(1)'
-                    e.currentTarget.style.boxShadow = '0 0 20px rgba(195, 74, 54, 0.10), 0 8px 30px rgba(0,0,0,0.06)'
+                    e.currentTarget.style.removeProperty('--team-transform')
+                    e.currentTarget.style.removeProperty('--team-shadow')
                     const img = e.currentTarget.querySelector('img')
                     const overlay = e.currentTarget.querySelector('.team-overlay')
                     if (img) img.style.transform = 'scale(1)'

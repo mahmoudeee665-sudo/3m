@@ -44,8 +44,20 @@ export default function WhyMmm() {
               <motion.div
                 key={i}
                 variants={itemAnim}
-                className="rounded-2xl p-6 md:p-8 border"
-                style={{ background: 'var(--bg-secondary)', borderColor: 'var(--border)' }}
+                className="rounded-2xl p-6 md:p-8 border transition-all duration-700 ease-out hover:-translate-y-1"
+                style={{
+                  background: 'var(--bg-secondary)',
+                  borderColor: 'var(--card-border, var(--border))',
+                  boxShadow: 'var(--card-shadow, none)',
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.setProperty('--card-border', iconColors[i])
+                  e.currentTarget.style.setProperty('--card-shadow', `0 8px 30px color-mix(in srgb, ${iconColors[i]} 12%, transparent)`)
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.removeProperty('--card-border')
+                  e.currentTarget.style.removeProperty('--card-shadow')
+                }}
               >
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: iconColors[i], color: '#fff' }}>
@@ -81,11 +93,18 @@ export default function WhyMmm() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-12 text-center p-8 rounded-3xl border"
-          style={{ background: 'var(--bg-secondary)', borderColor: 'var(--border)' }}
+          className="mt-12 text-center p-8 md:p-10 rounded-3xl border transition-all duration-700 ease-out hover:-translate-y-1"
+          style={{
+            background: 'var(--bg-tertiary)',
+            borderColor: 'var(--border)',
+            borderLeft: '3px solid var(--accent-fire)',
+            boxShadow: 'var(--quote-shadow, none)',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.setProperty('--quote-shadow', '0 8px 30px color-mix(in srgb, var(--accent-fire) 12%, transparent)') }}
+          onMouseLeave={e => { e.currentTarget.style.removeProperty('--quote-shadow') }}
         >
-          <p className="text-lg md:text-xl font-medium max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
-            {t('whyMmm.bottomLine')}
+          <p className="text-xl md:text-2xl font-medium italic leading-relaxed max-w-3xl mx-auto" style={{ color: 'var(--text-primary)' }}>
+            "{t('whyMmm.bottomLine')}"
           </p>
         </motion.div>
       </div>

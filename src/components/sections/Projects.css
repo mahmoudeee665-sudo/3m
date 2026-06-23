@@ -5,23 +5,25 @@
 
 .embla__container {
   display: flex;
-  gap: 19px;
+  margin-left: -9.5px;
 }
 
 .embla__slide {
   flex: 0 0 100%;
+  padding: 0 9.5px;
+  box-sizing: border-box;
 }
 
 @media (min-width: 600px) {
-  .embla__slide { flex: 0 0 calc(50% - 9.5px); }
+  .embla__slide { flex: 0 0 50%; }
 }
 
 @media (min-width: 992px) {
-  .embla__slide { flex: 0 0 calc(33.3333% - 12.67px); }
+  .embla__slide { flex: 0 0 33.3333%; }
 }
 
 @media (min-width: 1200px) {
-  .embla__slide { flex: 0 0 calc(25% - 14.25px); }
+  .embla__slide { flex: 0 0 25%; }
 }
 
 .carousel-btn {
@@ -78,6 +80,7 @@
   background-color: transparent;
   padding: 0;
   width: 100%;
+  box-sizing: border-box;
   border-radius: 24px;
   overflow: hidden;
   background-color: var(--bg-secondary);

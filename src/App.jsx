@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState, useRef, createContext, useContext } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './components/layout/Navbar.jsx'
 import Footer from './components/layout/Footer.jsx'
@@ -9,6 +9,7 @@ import BackToTop from './components/ui/BackToTop.jsx'
 import CustomCursor from './components/ui/CustomCursor.jsx'
 import WhatsAppButton from './components/ui/WhatsAppButton.jsx'
 import SplashScreen from './components/ui/SplashScreen.jsx'
+import PageLoader from './components/ui/PageLoader.jsx'
 import Marquee from './components/sections/Marquee.jsx'
 import Services from './components/sections/Services.jsx'
 import SectionDivider from './components/ui/SectionDivider.jsx'
@@ -20,10 +21,7 @@ import CTA from './components/sections/CTA.jsx'
 import StructuredData from './components/seo/StructuredData.jsx'
 import useSEO from './hooks/useSEO.js'
 
-const ProjectsPage = lazy(() => import('./pages/ProjectsPage.jsx'))
-const PrivacyPage = lazy(() => import('./pages/Privacy.jsx'))
-const TermsPage = lazy(() => import('./pages/Terms.jsx'))
-const NotFoundPage = lazy(() => import('./pages/NotFound.jsx'))
+const NavContext = createContext()
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -32,6 +30,8 @@ function ScrollToTop() {
 }
 
 function PageWrap({ children }) {
+  const { onPageLoaded } = useContext(NavContext)
+  useEffect(() => { onPageLoaded() }, [])
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -72,13 +72,34 @@ function Home() {
   )
 }
 
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage.jsx'))
+const PrivacyPage = lazy(() => import('./pages/Privacy.jsx'))
+const TermsPage = lazy(() => import('./pages/Terms.jsx'))
+const NotFoundPage = lazy(() => import('./pages/NotFound.jsx'))
+
 function App() {
   const [splashDone, setSplashDone] = useState(false)
+  const [navigating, setNavigating] = useState(false)
   const location = useLocation()
+  const prevPath = useRef(location.pathname)
+
+  useEffect(() => {
+    if (location.pathname !== prevPath.current) {
+      prevPath.current = location.pathname
+      setNavigating(true)
+    }
+  }, [location.pathname])
+
+  function onPageLoaded() {
+    setNavigating(false)
+  }
 
   return (
-    <>
+    <NavContext.Provider value={{ onPageLoaded }}>
       {!splashDone && <SplashScreen onFinish={() => setSplashDone(true)} />}
+      <AnimatePresence>
+        {navigating && <PageLoader />}
+      </AnimatePresence>
       <StructuredData />
       <CustomCursor />
       <ScrollProgress />
@@ -87,16 +108,16 @@ function App() {
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Suspense fallback={null}><PageWrap><ProjectsPage /></PageWrap></Suspense>} />
-          <Route path="/privacy" element={<Suspense fallback={null}><PageWrap><PrivacyPage /></PageWrap></Suspense>} />
-          <Route path="/terms" element={<Suspense fallback={null}><PageWrap><TermsPage /></PageWrap></Suspense>} />
-          <Route path="*" element={<Suspense fallback={null}><PageWrap><NotFoundPage /></PageWrap></Suspense>} />
+          <Route path="/projects" element={<Suspense fallback={<PageLoader />}><PageWrap><ProjectsPage /></PageWrap></Suspense>} />
+          <Route path="/privacy" element={<Suspense fallback={<PageLoader />}><PageWrap><PrivacyPage /></PageWrap></Suspense>} />
+          <Route path="/terms" element={<Suspense fallback={<PageLoader />}><PageWrap><TermsPage /></PageWrap></Suspense>} />
+          <Route path="*" element={<Suspense fallback={<PageLoader />}><PageWrap><NotFoundPage /></PageWrap></Suspense>} />
         </Routes>
       </AnimatePresence>
       <Footer />
       <BackToTop />
       <WhatsAppButton />
-    </>
+    </NavContext.Provider>
   )
 }
 

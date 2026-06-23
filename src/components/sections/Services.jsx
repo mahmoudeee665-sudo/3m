@@ -69,18 +69,19 @@ export default function Services() {
               key={i}
               variants={itemAnim}
               onClick={() => setSelected({ ...s, origIndex: i })}
-              className={`group relative rounded-2xl p-6 md:p-8 border text-left cursor-pointer transition-all duration-300 hover:-translate-y-1 ${s.cols}`}
+              className={`group relative rounded-2xl p-6 md:p-8 border text-left cursor-pointer transition-all duration-700 ease-out hover:-translate-y-1 ${s.cols}`}
               style={{
                 background: 'var(--bg-secondary)',
-                borderColor: 'var(--border)',
+                borderColor: 'var(--card-border, var(--border))',
+                boxShadow: 'var(--card-shadow, none)',
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.borderColor = s.accent
-                e.currentTarget.style.boxShadow = `0 8px 30px color-mix(in srgb, ${s.accent} 12%, transparent)`
+                e.currentTarget.style.setProperty('--card-border', s.accent)
+                e.currentTarget.style.setProperty('--card-shadow', `0 8px 30px color-mix(in srgb, ${s.accent} 12%, transparent)`)
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.borderColor = 'var(--border)'
-                e.currentTarget.style.boxShadow = ''
+                e.currentTarget.style.removeProperty('--card-border')
+                e.currentTarget.style.removeProperty('--card-shadow')
               }}
             >
               <div className="flex items-center gap-3 mb-3">

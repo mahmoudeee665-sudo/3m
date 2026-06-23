@@ -23,23 +23,13 @@ export default function Footer() {
     }
   }
 
-  const footerLinks = [
-    {
-      title: t('footer.services'),
-      links: [
-        { label: t('footer.servicesLink'), id: 'services' },
-        { label: t('footer.process'), id: 'process' },
-        { label: t('footer.projects'), id: 'work' },
-      ],
-    },
-    {
-      title: t('footer.company'),
-      links: [
-        { label: t('footer.aboutUs'), id: 'about' },
-        { label: t('footer.team'), id: 'team' },
-        { label: t('footer.contact'), id: 'contact' },
-      ],
-    },
+  const navLinks = [
+    { label: t('footer.servicesLink'), id: 'services' },
+    { label: t('footer.process'), id: 'process' },
+    { label: t('footer.projects'), id: 'work' },
+    { label: t('footer.aboutUs'), id: 'about' },
+    { label: t('footer.team'), id: 'team' },
+    { label: t('footer.contact'), id: 'contact' },
   ]
 
   const socials = [
@@ -49,57 +39,47 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-[var(--border)] bg-[var(--bg-secondary)]">
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-12">
-          <div className="col-span-2 sm:col-span-1">
+      <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-10">
+          <div className="flex items-center gap-4">
             <img
               src={dark ? '/logos/White.svg' : '/logos/dark%20purp.svg'}
-              alt="triple m — Digital Craftsmanship Studio"
-              className="h-8 w-auto"
+              alt="triple m"
+              className="h-7 w-auto"
             />
-            <p className="mt-3 text-sm font-medium" style={{ color: 'var(--accent-fire)' }}>
+            <span className="text-sm font-medium hidden sm:inline" style={{ color: 'var(--accent-fire)' }}>
               {t('footer.tagline')}
-            </p>
+            </span>
           </div>
-          {footerLinks.map(col => (
-            <div key={col.title}>
-              <h4 className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--text-muted)' }}>{col.title}</h4>
-              <ul className="space-y-2">
-                {col.links.map(l => (
-                  <li key={l.id}>
-                    <button
-                      onClick={() => scrollTo(l.id)}
-                      className="text-sm transition-colors duration-200 bg-transparent border-0 p-0 cursor-pointer"
-                      style={{ color: 'var(--text-secondary)' }}
-                      onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-fire)'}
-                      onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
-                    >
-                      {l.label}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-          <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--text-muted)' }}>{t('footer.social')}</h4>
-            <ul className="space-y-2">
-              {socials.map(s => (
-                <li key={s.name}>
-                  <a
-                    href={s.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-sm transition-colors duration-200"
-                    style={{ color: 'var(--text-secondary)' }}
-                    onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-fire)'}
-                    onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
-                  >
-                    {s.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+            {navLinks.map(l => (
+              <button
+                key={l.id}
+                onClick={() => scrollTo(l.id)}
+                className="text-sm transition-colors duration-200 bg-transparent border-0 p-0 cursor-pointer"
+                style={{ color: 'var(--text-secondary)' }}
+                onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-fire)'}
+                onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
+              >
+                {l.label}
+              </button>
+            ))}
+          </nav>
+          <div className="flex items-center gap-4">
+            {socials.map(s => (
+              <a
+                key={s.name}
+                href={s.href}
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs font-medium transition-colors duration-200 no-underline"
+                style={{ color: 'var(--text-muted)' }}
+                onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-fire)'}
+                onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
+              >
+                {s.name}
+              </a>
+            ))}
           </div>
         </div>
 

@@ -28,7 +28,7 @@ export default function Process() {
         <div className="relative">
           <svg
             ref={lineRef}
-            className="absolute left-[19px] md:left-1/2 md:-translate-x-1/2 top-0"
+            className="absolute left-5 md:left-1/2 md:-translate-x-1/2 top-0"
             width="2" height="100%"
             style={{ overflow: 'visible' }}
           >
@@ -47,17 +47,33 @@ export default function Process() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: '-80px' }}
                   transition={{ duration: 0.6 }}
-                  className={`relative flex items-start gap-6 md:gap-0 md:flex ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+                  className="relative flex items-start"
                 >
-                  <div className="relative z-10 w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold shrink-0 md:absolute md:left-1/2 md:-translate-x-1/2"
+                  {/* Circle */}
+                  <div className="relative z-10 w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold shrink-0 absolute left-5 -translate-x-1/2 md:left-1/2"
                     style={{ background: 'var(--accent-fire)', color: '#fff', boxShadow: '0 0 0 4px var(--bg-secondary)' }}
                   >
                     {s.num}
                   </div>
-                  <div className={`md:w-[calc(50%-2rem)] ${isLeft ? 'md:text-right md:pr-0' : 'md:text-left md:pl-0'}`}>
+
+                  {/* Text on mobile (always pl-14) */}
+                  <div className="w-full pl-14 md:hidden transition-all duration-700 ease-out hover:-translate-y-0.5">
                     <h3 className="font-space font-semibold text-xl mb-2">{s.title}</h3>
                     <p style={{ color: 'var(--text-secondary)' }}>{s.desc}</p>
                   </div>
+
+                  {/* Text on desktop (alternating sides) */}
+                  {isLeft ? (
+                    <div className="hidden md:block md:w-[calc(50%-2rem)] md:mr-12 md:text-right transition-all duration-700 ease-out hover:-translate-y-0.5">
+                      <h3 className="font-space font-semibold text-xl mb-2">{s.title}</h3>
+                      <p style={{ color: 'var(--text-secondary)' }}>{s.desc}</p>
+                    </div>
+                  ) : (
+                    <div className="hidden md:block md:w-[calc(50%-2rem)] md:ml-auto md:text-left transition-all duration-700 ease-out hover:-translate-y-0.5">
+                      <h3 className="font-space font-semibold text-xl mb-2">{s.title}</h3>
+                      <p style={{ color: 'var(--text-secondary)' }}>{s.desc}</p>
+                    </div>
+                  )}
                 </motion.div>
               )
             })}
