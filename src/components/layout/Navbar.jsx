@@ -2,8 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Menu, X, ExternalLink } from 'lucide-react'
-import ThemeToggle from '../ui/ThemeToggle.jsx'
-import LangToggle from '../ui/LangToggle.jsx'
+import NavControls from '../ui/NavControls.jsx'
 import useScrollSpy from '../../hooks/useScrollSpy.js'
 import { useTranslation } from '../../context/LanguageContext.jsx'
 
@@ -116,8 +115,7 @@ export default function Navbar() {
               </div>
 
             <div className="hidden md:flex items-center gap-2">
-              <ThemeToggle />
-              <LangToggle />
+              <NavControls />
               <button
                 onClick={() => scrollTo('contact')}
                 className="border-none cursor-pointer text-[13px] font-medium rounded-full px-5 py-2 transition-all duration-200 hover:brightness-110 shrink-0"
@@ -132,8 +130,7 @@ export default function Navbar() {
             </div>
 
             <div className="md:hidden flex items-center gap-1">
-              <ThemeToggle />
-              <LangToggle />
+              <NavControls />
               <button
                 onClick={() => setOpen(true)}
                 className="bg-transparent border-none cursor-pointer p-1.5"

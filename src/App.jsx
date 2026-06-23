@@ -5,7 +5,6 @@ import Navbar from './components/layout/Navbar.jsx'
 import Footer from './components/layout/Footer.jsx'
 import Hero from './components/sections/Hero.jsx'
 import ScrollProgress from './components/ui/ScrollProgress.jsx'
-import BackToTop from './components/ui/BackToTop.jsx'
 import CustomCursor from './components/ui/CustomCursor.jsx'
 import WhatsAppButton from './components/ui/WhatsAppButton.jsx'
 import SplashScreen from './components/ui/SplashScreen.jsx'
@@ -22,12 +21,6 @@ import StructuredData from './components/seo/StructuredData.jsx'
 import useSEO from './hooks/useSEO.js'
 
 const NavContext = createContext()
-
-function ScrollToTop() {
-  const { pathname } = useLocation()
-  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
-  return null
-}
 
 function PageWrap({ children }) {
   const { onPageLoaded } = useContext(NavContext)
@@ -104,7 +97,6 @@ function App() {
       <CustomCursor />
       <ScrollProgress />
       <Navbar />
-      <ScrollToTop />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
@@ -115,7 +107,6 @@ function App() {
         </Routes>
       </AnimatePresence>
       <Footer />
-      <BackToTop />
       <WhatsAppButton />
     </NavContext.Provider>
   )
