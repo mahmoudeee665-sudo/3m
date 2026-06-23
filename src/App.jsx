@@ -17,7 +17,6 @@ import Projects from './components/sections/Projects.jsx'
 import Process from './components/sections/Process.jsx'
 import Team from './components/sections/Team.jsx'
 import CTA from './components/sections/CTA.jsx'
-import Testimonials from './components/sections/Testimonials.jsx'
 import StructuredData from './components/seo/StructuredData.jsx'
 import useSEO from './hooks/useSEO.js'
 
@@ -60,10 +59,13 @@ function Home() {
         <Services />
         <SectionDivider flip />
         <WhyMmm />
+        <SectionDivider />
         <Projects />
-        <Testimonials />
+        <SectionDivider flip />
         <Process />
+        <SectionDivider />
         <Team />
+        <SectionDivider flip />
         <CTA />
       </main>
     </PageWrap>

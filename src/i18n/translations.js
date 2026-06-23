@@ -136,7 +136,7 @@ const en = {
       { title: 'Modern, Maintainable Tech', us: 'React, Next.js, Supabase — built to last.', them: 'Outdated stacks that are hard to update later',
         detail: "We build with tools that are widely used and easy for any future developer to pick up — your site isn't locked into us forever." },
     ],
-    bottomLine: "Bottom line: we're not a big agency with account managers and a six-month roadmap. We're a small team that ships fast, communicates directly, and tells you the truth about scope.",
+    bottomLine: "Small team, fast shipping, direct communication — and we'll tell you the truth about scope from day one.",
     badgeUs: 'triple m', badgeThem: 'Others',
   },
   process: {
@@ -301,7 +301,7 @@ const ar = {
       { title: 'تقنيات حديثة وقابلة للصيانة', us: 'React وNext.js وSupabase — أدوات تدوم.', them: 'تقنيات قديمة يصعب تطويرها لاحقًا',
         detail: 'نبني باستخدام أدوات منتشرة وسهلة على أي مطور آخر التعامل معها لاحقًا — موقعك ليس مرتبطًا بنا إلى الأبد.' },
     ],
-    bottomLine: 'الخلاصة: نحن لسنا وكالة كبيرة بمدراء حسابات وخارطة طريق تمتد ستة أشهر. نحن فريق صغير يُسلّم بسرعة، يتواصل معك مباشرة، ويخبرك بصدق عن نطاق العمل.',
+    bottomLine: 'فريق صغير، تسليم سريع، تواصل مباشر — ونخبرك بصدق عن نطاق العمل من اليوم الأول.',
     badgeUs: 'triple m', badgeThem: 'آخرون',
   },
   process: {
