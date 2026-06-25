@@ -22,7 +22,7 @@ const team = [
     titleEn: 'Co-Founder & Creative Designer',
     titleAr: 'مؤسس مشارك ومصمم إبداعي',
     img: '/moataz.webp',
-    portfolio: 'https://moataz-s.netlify.app/',
+    portfolio: 'https://mo3tazv1.vercel.app/',
   },
 ]
 
