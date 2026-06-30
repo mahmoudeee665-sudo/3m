@@ -10,7 +10,7 @@ const en = {
     words: ['Web Apps', 'E-Commerce', 'Shopify Stores', 'Startup MVPs', 'UI/UX Design'],
     weBuild: 'We build', seeOurWork: 'See Our Work', getQuote: 'Get a free quote',
   },
-  marquee: ['Web Apps', 'E-Commerce', 'Shopify', 'MVPs', 'UI/UX Design', 'Supabase'],
+  marquee: ['Web Apps', 'E-Commerce', 'Shopify', 'MVPs', 'UI/UX Design'],
   services: {
     label: 'WHAT WE DO',
     heading: 'What We Build',
@@ -176,7 +176,7 @@ const ar = {
     words: ['تطبيقات ويب', 'تجارة إلكترونية', 'متاجر Shopify', 'MVP للستارت أبس', 'تصميم واجهات'],
     weBuild: 'نبني', seeOurWork: 'شاهد أعمالنا', getQuote: 'احصل على عرض سعر',
   },
-  marquee: ['تطبيقات ويب', 'تجارة إلكترونية', 'Shopify', 'MVP', 'تصميم واجهات', 'Supabase'],
+  marquee: ['تطبيقات ويب', 'تجارة إلكترونية', 'Shopify', 'MVP', 'تصميم واجهات'],
   services: {
     label: 'ماذا نفعل', heading: 'فيما نتخصص',
     desc: 'نركّز على خمس خدمات فقط، ونتقنها بعناية.',
