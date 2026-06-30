@@ -318,17 +318,17 @@ body {
   font-family: 'Cairo', 'Space Grotesk', sans-serif;
   letter-spacing: 0;
   width: 100%;
-  text-align: right;
+  text-align: center;
 }
 
 .rtl .hero-tagline {
   width: 100%;
-  text-align: right;
+  text-align: center;
 }
 
 .rtl .hero-typewriter-wrap {
   width: 100%;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .hero-heading-line {
@@ -530,12 +530,12 @@ body {
   }
 
   .rtl .hero-cta-group {
-    justify-content: flex-end;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
   }
 
   .rtl .hero-typewriter-wrap {
-    justify-content: flex-start;
+    justify-content: center;
   }
 
   .hero-tagline {
