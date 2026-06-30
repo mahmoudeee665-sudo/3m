@@ -50,10 +50,10 @@ function Home() {
         <Marquee />
         <SectionDivider />
         <Services />
-        <SectionDivider flip />
-        <WhyMmm />
         <SectionDivider />
         <Projects />
+        <SectionDivider flip />
+        <WhyMmm />
         <SectionDivider flip />
         <Process />
         <SectionDivider />

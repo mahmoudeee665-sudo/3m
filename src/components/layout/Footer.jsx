@@ -38,25 +38,29 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="border-t border-[var(--border)] bg-[var(--bg-secondary)]">
+    <footer className="border-t border-[var(--border)]" style={{ background: 'var(--bg-secondary)' }}>
       <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-10">
+        {/* Top row */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-10">
           <div className="flex items-center gap-4">
             <img
               src={dark ? '/logos/White.svg' : '/logos/dark%20purp.svg'}
               alt="triple m"
               className="h-7 w-auto"
             />
-            <span className="text-sm font-medium hidden sm:inline" style={{ color: 'var(--accent-fire)' }}>
+            <span className="hidden sm:inline text-sm font-medium px-3 py-1 rounded-full" style={{
+              background: 'color-mix(in srgb, var(--accent-fire) 8%, transparent)',
+              color: 'var(--accent-fire)',
+            }}>
               {t('footer.tagline')}
             </span>
           </div>
-          <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+          <nav className="flex flex-wrap justify-center gap-x-8 gap-y-2">
             {navLinks.map(l => (
               <button
                 key={l.id}
                 onClick={() => scrollTo(l.id)}
-                className="text-sm transition-colors duration-200 bg-transparent border-0 p-0 cursor-pointer"
+                className="text-sm transition-all duration-200 bg-transparent border-0 p-0 cursor-pointer hover:-translate-y-0.5"
                 style={{ color: 'var(--text-secondary)' }}
                 onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-fire)'}
                 onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
@@ -65,40 +69,35 @@ export default function Footer() {
               </button>
             ))}
           </nav>
-          <div className="flex items-center gap-4">
-            {socials.map(s => (
-              <a
-                key={s.name}
-                href={s.href}
-                target="_blank"
-                rel="noreferrer"
-                className="text-xs font-medium transition-colors duration-200 no-underline"
-                style={{ color: 'var(--text-muted)' }}
-                onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-fire)'}
-                onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
-              >
-                {s.name}
-              </a>
-            ))}
-          </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-[var(--border)]">
+        {/* Bottom row */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t" style={{ borderColor: 'var(--border)' }}>
           <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
             &copy; 2026 triple m &middot; {t('footer.rights')}
           </p>
           <div className="flex items-center gap-6">
-            <Link to="/privacy" className="text-xs transition-colors no-underline" style={{ color: 'var(--text-muted)' }}
-               onMouseEnter={e => e.currentTarget.style.color = 'var(--text-secondary)'}
-               onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}>
+            <Link to="/privacy" className="text-xs transition-colors no-underline hover:text-[var(--accent-fire)]" style={{ color: 'var(--text-muted)' }}>
               {t('footer.privacy')}
             </Link>
-            <Link to="/terms" className="text-xs transition-colors no-underline" style={{ color: 'var(--text-muted)' }}
-               onMouseEnter={e => e.currentTarget.style.color = 'var(--text-secondary)'}
-               onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}>
+            <Link to="/terms" className="text-xs transition-colors no-underline hover:text-[var(--accent-fire)]" style={{ color: 'var(--text-muted)' }}>
               {t('footer.terms')}
             </Link>
-            <ThemeToggle />
+            <div className="flex items-center gap-3 pl-6 border-l" style={{ borderColor: 'var(--border)' }}>
+              {socials.map(s => (
+                <a
+                  key={s.name}
+                  href={s.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-xs font-medium transition-all duration-200 no-underline hover:text-[var(--accent-fire)] hover:-translate-y-0.5"
+                  style={{ color: 'var(--text-muted)' }}
+                >
+                  {s.name}
+                </a>
+              ))}
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </div>

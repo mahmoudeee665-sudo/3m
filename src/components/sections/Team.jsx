@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ExternalLink } from 'lucide-react'
+import { ExternalLink, Globe } from 'lucide-react'
 import { useTranslation } from '../../context/LanguageContext.jsx'
 
 const team = [
@@ -8,7 +8,7 @@ const team = [
     titleEn: 'Co-Founder & Web Developer',
     titleAr: 'مؤسس مشارك ومطور ويب',
     img: '/ramy.webp',
-    portfolio: '#',
+    portfolio: 'https://www.linkedin.com/',
   },
   {
     name: 'Mahmoud Magdy Hussien',
@@ -74,8 +74,9 @@ export default function Team() {
                 transition={{ delay: i * 0.15 }}
                 className="group flex flex-col items-center text-center"
               >
+                {/* Photo with gradient ring */}
                 <div
-                  className="relative rounded-full p-[2px] mb-5 w-44 h-44 sm:w-52 sm:h-52"
+                  className="relative rounded-full p-[2px] mb-5 w-44 h-44 sm:w-48 sm:h-48"
                   style={{
                     background: 'linear-gradient(135deg, var(--accent-fire), var(--accent-electric))',
                     transition: 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)',
@@ -83,11 +84,11 @@ export default function Team() {
                     transform: 'var(--team-transform, translateY(0) scale(1))',
                   }}
                   onMouseEnter={e => {
-                    e.currentTarget.style.setProperty('--team-transform', 'translateY(-8px) scale(1.05)')
+                    e.currentTarget.style.setProperty('--team-transform', 'translateY(-6px) scale(1.03)')
                     e.currentTarget.style.setProperty('--team-shadow', '0 0 60px rgba(195, 74, 54, 0.25), 0 0 60px rgba(124, 111, 232, 0.15), 0 25px 50px rgba(0,0,0,0.12)')
                     const img = e.currentTarget.querySelector('img')
                     const overlay = e.currentTarget.querySelector('.team-overlay')
-                    if (img) img.style.transform = 'scale(1.1)'
+                    if (img) img.style.transform = 'scale(1.08)'
                     if (overlay) overlay.style.opacity = '1'
                   }}
                   onMouseLeave={e => {
@@ -112,7 +113,7 @@ export default function Team() {
                     <div
                       className="team-overlay absolute inset-0 rounded-full"
                       style={{
-                        background: 'linear-gradient(180deg, transparent 50%, rgba(195, 74, 54, 0.25) 100%)',
+                        background: 'linear-gradient(180deg, transparent 50%, rgba(195, 74, 54, 0.35) 100%)',
                         transition: 'opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
                         opacity: 0,
                       }}
@@ -120,29 +121,43 @@ export default function Team() {
                   </div>
                 </div>
 
+                {/* Name & Title */}
                 <div className="relative">
-                  <h3
-                    className="font-semibold text-lg sm:text-xl mb-1"
-                    style={{ color: 'var(--text-primary)' }}
-                  >
+                  <h3 className="font-semibold text-lg sm:text-xl mb-1" style={{ color: 'var(--text-primary)' }}>
                     {member.name}
                   </h3>
-
                   <p className="text-sm font-medium mb-4" style={{ color: 'var(--accent-fire)' }}>
                     {lang === 'ar' ? member.titleAr : member.titleEn}
                   </p>
 
-                  <span className="inline-flex rounded-full p-[2px] mt-3" style={{ background: 'linear-gradient(135deg, var(--accent-fire), #d96b4a)' }}>
-                    <a
-                      href={member.portfolio}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-semibold tracking-wider uppercase bg-[var(--bg-primary)] text-[var(--text-primary)] hover:bg-transparent transition-all duration-300"
-                    >
-                      <ExternalLink size={10} />
-                      {lang === 'ar' ? 'معرض الأعمال' : 'View Portfolio'}
-                    </a>
-                  </span>
+                  {/* Portfolio Button */}
+                  <a
+                    href={member.portfolio}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-700 ease-out hover:-translate-y-1 hover:scale-105"
+                    style={{
+                      background: 'color-mix(in srgb, var(--accent-fire) 8%, var(--bg-primary))',
+                      color: 'var(--accent-fire)',
+                      border: '1px solid color-mix(in srgb, var(--accent-fire) 20%, transparent)',
+                      boxShadow: '0 0 0 transparent',
+                      transition: 'background 0.7s ease-out, color 0.7s ease-out, box-shadow 0.7s ease-out, transform 0.7s ease-out',
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.background = 'var(--accent-fire)'
+                      e.currentTarget.style.color = '#fff'
+                      e.currentTarget.style.boxShadow = '0 4px 20px color-mix(in srgb, var(--accent-fire) 30%, transparent)'
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.background = 'color-mix(in srgb, var(--accent-fire) 8%, var(--bg-primary))'
+                      e.currentTarget.style.color = 'var(--accent-fire)'
+                      e.currentTarget.style.boxShadow = '0 0 0 transparent'
+                    }}
+                  >
+                    <Globe size={12} />
+                    {lang === 'ar' ? 'معرض الأعمال' : 'View Portfolio'}
+                    <ExternalLink size={10} />
+                  </a>
                 </div>
               </motion.div>
             )
