@@ -5,12 +5,15 @@ export default function Marquee() {
   const items = t('marquee')
 
   return (
-    <div className="overflow-hidden border-t border-b border-[var(--border)]" style={{ background: 'var(--bg-secondary)' }}>
-      <div className="relative overflow-hidden py-6 md:py-8 space-y-4 md:space-y-5">
-        {/* Row 1 — LTR */}
+    <div
+      className="overflow-hidden border-t border-b border-[var(--border)]"
+      style={{ background: 'var(--bg-secondary)', direction: 'ltr' }}  
+    >
+      <div className="relative overflow-hidden py-6 md:py-8 space-y-3 md:space-y-4">
+        {/* Row 1 — scrolls left */}
         <div className="flex marquee-ltr">
-          {[...Array(3)].map((_, c) => (
-            <div key={c} className="flex shrink-0 gap-3 md:gap-4 mx-1.5">
+          {[...Array(4)].map((_, c) => (
+            <div key={c} className="flex shrink-0">
               {items.map((text, i) => (
                 <span key={`${c}-${i}`} className="marquee-tag">
                   {text}
@@ -20,10 +23,10 @@ export default function Marquee() {
           ))}
         </div>
 
-        {/* Row 2 — RTL alternate styling */}
+        {/* Row 2 — scrolls right */}
         <div className="flex marquee-rtl">
-          {[...Array(3)].map((_, c) => (
-            <div key={c} className="flex shrink-0 gap-3 md:gap-4 mx-1.5">
+          {[...Array(4)].map((_, c) => (
+            <div key={c} className="flex shrink-0">
               {[...items].reverse().map((text, i) => (
                 <span key={`${c}-${i}`} className="marquee-tag marquee-tag-alt">
                   {text}
@@ -34,26 +37,37 @@ export default function Marquee() {
         </div>
 
         <style>{`
-          .marquee-ltr { animation: scroll-ltr 45s linear infinite; width: max-content; }
-          .marquee-rtl { animation: scroll-rtl 38s linear infinite; width: max-content; }
+          .marquee-ltr {
+            animation: scroll-ltr 40s linear infinite;
+            animation-delay: -20s;
+            width: max-content;
+            display: flex;
+          }
+          .marquee-rtl {
+            animation: scroll-rtl 40s linear infinite;
+            animation-delay: -20s;
+            width: max-content;
+            display: flex;
+          }
           .marquee-ltr:hover, .marquee-rtl:hover { animation-play-state: paused; }
 
           @keyframes scroll-ltr {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-33.333%); }
+            100% { transform: translateX(-25%); }
           }
           @keyframes scroll-rtl {
-            0% { transform: translateX(-33.333%); }
+            0% { transform: translateX(-25%); }
             100% { transform: translateX(0); }
           }
 
           .marquee-tag {
             display: inline-flex;
             align-items: center;
-            padding: 8px 22px;
-            border-radius: 100px;
             white-space: nowrap;
             flex-shrink: 0;
+            padding: 8px 22px;
+            margin: 0 6px;
+            border-radius: 100px;
             font-size: 13px;
             font-weight: 500;
             letter-spacing: 0.02em;
@@ -78,7 +92,7 @@ export default function Marquee() {
           }
 
           @media (min-width: 768px) {
-            .marquee-tag { padding: 10px 28px; font-size: 14px; gap: 10px; }
+            .marquee-tag { padding: 10px 28px; margin: 0 8px; font-size: 14px; }
           }
         `}</style>
       </div>
