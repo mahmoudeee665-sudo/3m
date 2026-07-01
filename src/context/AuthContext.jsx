@@ -10,45 +10,33 @@ const SESSION_TIMEOUT_MS = 30 * 60 * 1000
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [isAdmin, setIsAdmin] = useState(false)
   const [loginLocked, setLoginLocked] = useState(false)
   const loginAttempts = useRef(0)
   const sessionTimer = useRef(null)
 
+  const isAdmin = !!user
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null)
-      if (session?.user) checkAdmin(session.user.id)
       setLoading(false)
     })
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null)
-      if (session?.user) checkAdmin(session.user.id)
-      else setIsAdmin(false)
     })
 
     return () => subscription?.unsubscribe()
   }, [])
 
-  async function checkAdmin(userId) {
-    const { data } = await supabase
-      .from('admins')
-      .select('id')
-      .eq('id', userId)
-      .maybeSingle()
-    setIsAdmin(!!data)
-  }
-
   useEffect(() => {
-    if (!user || !isAdmin) return
+    if (!user) return
 
     function resetTimer() {
       clearTimeout(sessionTimer.current)
       sessionTimer.current = setTimeout(() => {
         supabase.auth.signOut()
         setUser(null)
-        setIsAdmin(false)
       }, SESSION_TIMEOUT_MS)
     }
 
@@ -84,14 +72,12 @@ export function AuthProvider({ children }) {
     }
     loginAttempts.current = 0
     setUser(data.user)
-    await checkAdmin(data.user.id)
   }
 
   async function signOut() {
     clearTimeout(sessionTimer.current)
     await supabase.auth.signOut()
     setUser(null)
-    setIsAdmin(false)
   }
 
   return (

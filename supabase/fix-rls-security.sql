@@ -26,6 +26,46 @@ CREATE TRIGGER update_projects_updated_at
   FOR EACH ROW
   EXECUTE FUNCTION update_updated_at_column();
 
--- 3. Ensure RLS is enabled (safe to re-run)
+-- 3. Simplify: any authenticated user is admin (login page is private)
+DROP POLICY IF EXISTS "Admins can read all projects" ON projects;
+DROP POLICY IF EXISTS "Admins can insert projects" ON projects;
+DROP POLICY IF EXISTS "Admins can update projects" ON projects;
+DROP POLICY IF EXISTS "Admins can delete projects" ON projects;
+
+CREATE POLICY "Authenticated users can read all projects"
+  ON projects FOR SELECT
+  USING (auth.role() = 'authenticated');
+
+CREATE POLICY "Authenticated users can insert projects"
+  ON projects FOR INSERT
+  WITH CHECK (auth.role() = 'authenticated');
+
+CREATE POLICY "Authenticated users can update projects"
+  ON projects FOR UPDATE
+  USING (auth.role() = 'authenticated');
+
+CREATE POLICY "Authenticated users can delete projects"
+  ON projects FOR DELETE
+  USING (auth.role() = 'authenticated');
+
+-- Storage: same simplification
+DROP POLICY IF EXISTS "Admins can upload project images" ON storage.objects;
+DROP POLICY IF EXISTS "Admins can delete project images" ON storage.objects;
+
+CREATE POLICY "Authenticated users can upload project images"
+  ON storage.objects FOR INSERT
+  WITH CHECK (
+    bucket_id = 'projects'
+    AND auth.role() = 'authenticated'
+  );
+
+CREATE POLICY "Authenticated users can delete project images"
+  ON storage.objects FOR DELETE
+  USING (
+    bucket_id = 'projects'
+    AND auth.role() = 'authenticated'
+  );
+
+-- 4. Ensure RLS is enabled (safe to re-run)
 ALTER TABLE projects ENABLE ROW LEVEL SECURITY;
 ALTER TABLE admins ENABLE ROW LEVEL SECURITY;
